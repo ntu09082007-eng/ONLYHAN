@@ -237,3 +237,92 @@ nav a:hover { color: var(--accent-color); }
     overflow: hidden;
     text-overflow: ellipsis; /* Hiện dấu ... nếu tên quá dài */
 }
+/* =========================================
+   FOOTER STYLE (GIAO DIỆN MỚI 100%)
+========================================= */
+footer {
+    background-color: #000000; /* Màu đen tuyền theo yêu cầu */
+    color: #ffffff;
+    padding: 50px 20px 30px 20px;
+    border-top: 1px solid #222; /* Viền mờ ngăn cách */
+    font-family: var(--font-main);
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center; /* Căn giữa nội dung phần trên */
+}
+
+/* Tiêu đề lớn */
+.footer-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mô tả */
+.footer-desc {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Link truy cập */
+.footer-link {
+    display: inline-block;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 40px;
+    transition: color 0.3s;
+}
+.footer-link:hover {
+    color: var(--accent-color); /* Hover chuyển màu xanh neon */
+}
+
+/* Đường kẻ ngang mảnh */
+.footer-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+/* Phần dưới cùng (Copyright & Chữ ký) */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between; /* Đẩy 2 bên ra xa nhau */
+    align-items: flex-end; /* Căn đáy cho thẳng hàng */
+    text-align: left;
+}
+
+.footer-left p {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin: 4px 0;
+}
+
+/* Chữ ký "Cảm ơn vì đã đến" */
+.footer-right {
+    font-family: 'Dancing Script', cursive; /* Font chữ viết tay */
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1;
+}
+
+/* Giao diện Mobile (Để không bị vỡ trên điện thoại) */
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column; /* Xếp dọc */
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .footer-title { font-size: 1.5rem; }
+}
