@@ -94,7 +94,19 @@ nav a:hover { color: var(--accent-color); }
     transition: transform 0.3s; 
     cursor: pointer;
 }
-.event-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+/* --- Code cũ (Giữ nguyên) --- */
+.event-card:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--accent-color); 
+}
+
+/* --- Code MỚI THÊM: Đổi màu chữ khi di chuột --- */
+.event-card:hover .event-title,
+.event-card:hover .event-loc,
+.event-card:hover .event-date {
+    color: var(--accent-color); /* Đổi sang màu xanh neon */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
 .event-date { font-family: var(--font-tech); color: var(--accent-color); font-size: 0.8rem; margin-bottom: 10px; }
 .event-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
 .event-status { 
