@@ -155,10 +155,17 @@ nav a:hover { color: var(--accent-color); }
     justify-content: center; align-items: center; backdrop-filter: blur(10px);
 }
 .modal-content {
-    width: 90%; max-width: 1000px; height: 85vh; 
-    background: #0a0a0a; border: 1px solid var(--accent-color);
-    border-radius: 15px; display: flex; flex-direction: column; 
-    padding: 25px; box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
+    width: 90%; 
+    max-width: 1000px; 
+    height: 85vh; /* Chiều cao cố định bằng 85% màn hình */
+    background: #0a0a0a; 
+    border: 1px solid var(--accent-color);
+    border-radius: 15px; 
+    display: flex; 
+    flex-direction: column; /* Xếp dọc: Đầu trang trên, lưới dưới */
+    padding: 25px; 
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
+    overflow: hidden; /* Cực kỳ quan trọng: Cắt bỏ phần thừa để thanh trượt nằm bên trong */
 }
 .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
 .search-box { flex-grow: 1; margin: 0 30px; position: relative; }
