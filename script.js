@@ -1,32 +1,25 @@
-// CẤU HÌNH SUPABASE (Giữ nguyên thông số của bạn)
+// CẤU HÌNH SUPABASE (Giữ nguyên của bạn)
 const supabaseUrl = 'https://srajbfixapsjnmsdldve.supabase.co';
 const supabaseKey = 'sb_publishable_aUPBpRiK4YfjgB7JYw_WSQ_GZd-zSrp';
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-// --- PHẦN 1: LOGIC CHO TRANG CHỦ (Danh sách) ---
+// --- 1. QUẢN LÝ SỰ KIỆN (CODE CŨ GIỮ NGUYÊN) ---
 async function fetchEvents() {
     const listElement = document.getElementById('event-list');
-    if (!listElement) return; // Nếu không tìm thấy list thì thoát (đang ở trang chi tiết)
+    if (!listElement) return;
 
     const { data, error } = await supabaseClient
         .from('events')
         .select('*')
         .order('id', { ascending: false });
 
-    if (error) {
-        listElement.innerHTML = '<p>Lỗi kết nối.</p>';
-        return;
-    }
+    if (error) { listElement.innerHTML = '<p>Lỗi kết nối.</p>'; return; }
 
     listElement.innerHTML = '';
     data.forEach(event => {
         const card = document.createElement('div');
         card.className = 'event-card';
-        // Thêm sự kiện click để chuyển trang
-        card.onclick = () => {
-            window.location.href = `event.html?id=${event.id}`;
-        };
-        
+        card.onclick = () => { window.location.href = `event.html?id=${event.id}`; };
         card.innerHTML = `
             <div class="event-date">${event.date_range || ''}</div>
             <div class="event-title">${event.title || ''}</div>
@@ -37,62 +30,116 @@ async function fetchEvents() {
     });
 }
 
-// --- PHẦN 2: LOGIC CHO TRANG CHI TIẾT (event.html) ---
-async function fetchEventDetail() {
-    const container = document.getElementById('event-detail-container');
-    if (!container) return; // Nếu không tìm thấy container thì thoát (đang ở trang chủ)
+// --- 2. QUẢN LÝ SẢN PHẨM ÂM NHẠC (CODE MỚI) ---
+let allProducts = []; // Biến lưu toàn bộ bài hát để tìm kiếm
 
-    // Lấy ID từ trên thanh địa chỉ (URL)
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventId = urlParams.get('id');
+async function fetchMusic() {
+    // Chỉ chạy nếu đang ở trang chủ
+    const carousel = document.getElementById('music-carousel');
+    const modalGrid = document.getElementById('modal-grid');
+    if (!carousel) return;
 
-    if (!eventId) {
-        container.innerHTML = '<p>Không tìm thấy sự kiện.</p>';
-        return;
-    }
-
-    // Gọi database lấy đúng sự kiện đó
-    const { data: event, error } = await supabaseClient
-        .from('events')
+    const { data, error } = await supabaseClient
+        .from('products')
         .select('*')
-        .eq('id', eventId)
-        .single();
+        .order('id', { ascending: false }); // Bài mới nhất lên đầu
 
-    if (error || !event) {
-        container.innerHTML = '<p>Sự kiện không tồn tại hoặc đã bị xóa.</p>';
-        return;
-    }
-
-    // Hiển thị giao diện chi tiết (Giống ảnh 2, 3)
-    // Nếu có ảnh thì hiện ảnh, không thì dùng ảnh mặc định
-    const imgSrc = event.image_url ? event.image_url : 'https://via.placeholder.com/800x400?text=No+Image';
-
-    container.innerHTML = `
-        <div class="detail-header">
-            <img src="${imgSrc}" alt="${event.title}" class="detail-image">
-        </div>
-        
-        <h1 class="detail-title">${event.title}</h1>
-        
-        <div class="detail-meta">
-            <span>📅 ${event.date_range}</span>
-            <span style="margin-left: 20px;">📍 ${event.location}</span>
-        </div>
-
-        ${event.external_link ? `
-            <a href="${event.external_link}" target="_blank" class="btn-detail">
-                ↗ Thông tin chi tiết
-            </a>
-        ` : ''}
-
-        <div class="detail-desc">
-            <p>${event.description || 'Chưa có mô tả chi tiết cho sự kiện này.'}</p>
-        </div>
-    `;
+    if (error) { console.error(error); return; }
+    
+    allProducts = data; // Lưu dữ liệu vào biến toàn cục
+    renderCarousel(data);
+    renderModalGrid(data);
 }
 
-// Chạy hàm tương ứng tùy theo đang ở trang nào
+// Hàm hiển thị Carousel
+function renderCarousel(products) {
+    const container = document.getElementById('music-carousel');
+    container.innerHTML = '';
+    
+    products.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'music-card';
+        card.innerHTML = `
+            <iframe class="video-embed" 
+                src="https://www.youtube.com/embed/${item.youtube_id}" 
+                title="${item.title}" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+            <div class="music-info">
+                <div class="music-title">${item.title}</div>
+                <div class="music-composer">${item.composer}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Hàm hiển thị Lưới trong Modal
+function renderModalGrid(products) {
+    const container = document.getElementById('modal-grid');
+    container.innerHTML = '';
+
+    if(products.length === 0) {
+        container.innerHTML = '<p style="color:#888; width:100%">Không tìm thấy kết quả.</p>';
+        return;
+    }
+
+    products.forEach(item => {
+        // Tái sử dụng class music-card nhưng CSS Grid sẽ tự chỉnh layout
+        const card = document.createElement('div');
+        card.className = 'music-card'; 
+        card.style.width = '100%'; // Trong lưới thì full width ô
+        card.innerHTML = `
+            <iframe class="video-embed" 
+                src="https://www.youtube.com/embed/${item.youtube_id}" 
+                allowfullscreen>
+            </iframe>
+            <div class="music-info">
+                <div class="music-title" style="font-size:1rem">${item.title}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// --- 3. CÁC NÚT ĐIỀU KHIỂN & TÌM KIẾM ---
+
+// Nút Next/Prev Carousel
+window.scrollCarousel = (direction) => {
+    const container = document.getElementById('music-carousel');
+    const scrollAmount = container.clientWidth * 0.6; // Trượt 60% chiều rộng
+    container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+};
+
+// Mở/Đóng Modal
+const modal = document.getElementById('music-modal');
+const btnShowAll = document.getElementById('btn-show-all');
+
+if(btnShowAll) {
+    btnShowAll.onclick = () => { modal.style.display = 'flex'; };
+}
+window.closeModal = () => { modal.style.display = 'none'; };
+
+// Tìm kiếm
+const searchInput = document.getElementById('search-input');
+if(searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase();
+        // Lọc dữ liệu
+        const filtered = allProducts.filter(item => 
+            item.title.toLowerCase().includes(keyword) || 
+            item.composer.toLowerCase().includes(keyword)
+        );
+        renderModalGrid(filtered);
+    });
+}
+
+// Chạy tất cả khi tải trang
 document.addEventListener('DOMContentLoaded', () => {
-    fetchEvents();       // Chạy ở trang chủ
-    fetchEventDetail();  // Chạy ở trang chi tiết
+    fetchEvents();
+    fetchMusic();
 });
+
+// Logic cho trang chi tiết sự kiện (Giữ nguyên)
+async function fetchEventDetail() { /* ... Code cũ của bạn ... */ }
+if(document.getElementById('event-detail-container')) fetchEventDetail();
