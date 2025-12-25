@@ -177,7 +177,19 @@ nav a:hover { color: var(--accent-color); }
 .search-box input:focus { border-color: var(--accent-color); }
 .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #888; }
 .close-modal { background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
-.modal-grid-body { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; overflow-y: auto; padding-right: 10px; }
+.modal-grid-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px; 
+    
+    /* CÁC DÒNG QUAN TRỌNG ĐỂ TẠO THANH TRƯỢT BÊN TRONG */
+    flex: 1;          /* Chiếm hết khoảng trống còn lại bên dưới thanh tìm kiếm */
+    overflow-y: auto; /* Hiện thanh trượt dọc khi nội dung dài */
+    min-height: 0;    /* Bắt buộc có để trượt mượt trên Firefox/Chrome */
+    
+    padding-right: 10px; /* Chừa chỗ cho thanh trượt đẹp hơn */
+    padding-bottom: 20px;
+}
 
 /* =========================================
    6. STATS & FOOTER (CŨNG BỊ MẤT NÊN THÊM LẠI)
