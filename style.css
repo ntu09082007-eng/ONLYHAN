@@ -3,7 +3,6 @@
     --text-color: #e0e0e0;
     --accent-color: #00f0ff;
     --border-color: #333;
-    /* Đổi cả hai biến font về Roboto */
     --font-main: 'Roboto', sans-serif;
     --font-tech: 'Roboto', sans-serif;
 }
@@ -18,276 +17,49 @@ body {
     overflow-x: hidden;
 }
 
-/* Hiệu ứng nền lưới */
+/* Nền và HUD */
 .bg-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: 
-        linear-gradient(rgba(5,5,5,0.9), rgba(5,5,5,0.9)),
-        url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-size: cover;
-    z-index: -1;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(5,5,5,0.9), rgba(5,5,5,0.9)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover; z-index: -1;
 }
 
-/* HUD Overlay - Các thông số 4 góc */
 .hud-overlay div {
-    position: fixed;
-    font-family: var(--font-tech);
-    font-size: 0.7rem;
-    color: var(--accent-color);
-    opacity: 0.8;
-    z-index: 100;
+    position: fixed; font-family: var(--font-tech); font-size: 0.7rem; color: var(--accent-color); opacity: 0.8; z-index: 100;
 }
 .top-left { top: 20px; left: 20px; border: 1px solid var(--accent-color); padding: 5px; }
 .top-right { top: 20px; right: 20px; }
 .bottom-left { bottom: 20px; left: 20px; }
 .bottom-right { bottom: 20px; right: 20px; }
-.blink { animation: blinker 1s linear infinite; color: red; }
-@keyframes blinker { 50% { opacity: 0; } }
 
 /* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(5px); position: sticky; top: 0; z-index: 50;
 }
 .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
 .highlight { color: var(--accent-color); }
 nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    transition: color 0.3s;
+    color: var(--text-color); text-decoration: none; margin-left: 20px;
+    font-size: 0.9rem; text-transform: uppercase; transition: color 0.3s;
 }
 nav a:hover { color: var(--accent-color); }
 
 /* Main Content */
 .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
 .section-title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    border-left: 4px solid var(--accent-color);
-    padding-left: 15px;
-    text-transform: uppercase;
+    font-size: 2rem; margin-bottom: 30px; border-left: 4px solid var(--accent-color); padding-left: 15px; text-transform: uppercase;
 }
 
 /* Hero Section */
 #hero {
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
 }
 .sub-hero { font-family: var(--font-tech); font-size: 1rem; color: var(--accent-color); letter-spacing: 3px; }
 .main-title { font-size: 5rem; font-weight: 700; margin: 10px 0; text-shadow: 0 0 20px rgba(0,240,255,0.3); }
 .hero-desc { font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 30px; }
 .btn-tech {
-    background: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 10px 30px;
-    font-family: var(--font-tech);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.btn-tech:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-color); }
-
-/* Event Cards */
-.grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-.event-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    transition: transform 0.3s;
-}
-.event-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-.event-date { font-family: var(--font-tech); color: var(--accent-color); font-size: 0.8rem; margin-bottom: 10px; }
-.event-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
-.event-status { 
-    display: inline-block; padding: 3px 8px; font-size: 0.7rem; 
-    background: #333; border-radius: 2px; 
-}
-
-/* Stats */
-.stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
-.stat-card { text-align: center; margin: 20px; }
-.stat-card .number { font-size: 3rem; font-weight: 700; color: var(--accent-color); }
-
-/* Footer */
-footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #888; }
-/* --- CSS CHO TRANG CHI TIẾT (EVENT DETAIL) --- */
-.detail-page {
-    max-width: 900px; /* Thu hẹp lại một chút cho dễ đọc */
-}
-
-.detail-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    border: 1px solid #333;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-}
-
-.detail-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #fff;
-}
-
-.detail-meta {
-    font-family: var(--font-tech);
-    color: #888;
-    margin-bottom: 30px;
-    font-size: 0.9rem;
-}
-
-/* Nút "Thông tin chi tiết" màu xanh */
-.btn-detail {
-    display: inline-block;
-    background-color: #008CBA; /* Màu xanh giống ảnh mẫu */
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    margin-bottom: 30px;
-    transition: background 0.3s;
-}
-
-.btn-detail:hover {
-    background-color: #00aaff;
-}
-
-.detail-desc {
-    font-size: 1.1rem;
-    color: #ccc;
-    line-height: 1.8;
-    text-align: justify;
-}
-
-/* Hiệu ứng trỏ chuột ở trang danh sách để biết là click được */
-.event-card {
-    cursor: pointer; 
-}
-/* --- MUSIC SECTION (CAROUSEL) --- */
-.music-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.btn-tech-sm {
-    background: rgba(0, 240, 255, 0.1);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 8px 16px;
-    cursor: pointer;
-    font-family: var(--font-tech);
-    border-radius: 20px;
-    transition: 0.3s;
-}
-.btn-tech-sm:hover { background: var(--accent-color); color: #000; }
-
-/* Carousel Wrapper */
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    gap: 30px;
-    padding: 20px 0;
-    width: 100%;
-    scrollbar-width: none;
-}
-.carousel-container::-webkit-scrollbar { display: none; }
-
-/* Thẻ Video */
-.music-card {
-    flex: 0 0 60%;
-    scroll-snap-align: center;
-    background: #0f0f0f;
-    border: 1px solid #333;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.video-embed {
-    width: 100%;
-    aspect-ratio: 16/9;
-    border: none;
-    display: block;
-}
-
-.music-info { padding: 15px; }
-.music-title { font-size: 1.2rem; font-weight: 700; color: #fff; }
-.music-composer { font-size: 0.8rem; color: #888; margin-top: 5px; }
-
-/* Nút điều hướng */
-.nav-btn {
-    background: transparent; color: var(--accent-color);
-    border: none; font-size: 2rem; cursor: pointer; padding: 0 15px;
-    z-index: 10;
-}
-
-/* --- MODAL (POPUP) --- */
-/* QUAN TRỌNG: display: none để ẩn nó đi */
-.modal-overlay {
-    display: none; 
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 9999;
-    justify-content: center; align-items: center;
-    backdrop-filter: blur(10px);
-}
-
-.modal-content {
-    width: 90%; max-width: 1000px; height: 85vh;
-    background: #0a0a0a; border: 1px solid var(--accent-color);
-    border-radius: 15px; display: flex; flex-direction: column; padding: 25px;
-    box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
-}
-
-.modal-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px;
-}
-
-.search-box { flex-grow: 1; margin: 0 30px; position: relative; }
-.search-box input {
-    width: 100%; padding: 12px 40px 12px 20px;
-    background: #1a1a1a; border: 1px solid #333; color: #fff;
-    border-radius: 30px; outline: none;
-}
-.search-box input:focus { border-color: var(--accent-color); }
-.search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #888; }
-
-.close-modal { background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
-
-.modal-grid-body {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px; overflow-y: auto; padding-right: 10px;
+    background: transparent; color: var(--accent-color); border: 1px solid var(--accent-color);
+    padding: 10px 30px; font-family: var(--font-tech); cursor: pointer; transition: all 0.3s;
 }
