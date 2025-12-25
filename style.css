@@ -147,27 +147,37 @@ nav a:hover { color: var(--accent-color); }
 .music-composer { font-size: 0.8rem; color: #888; margin-top: 5px; }
 .nav-btn { background: transparent; color: var(--accent-color); border: none; font-size: 2rem; cursor: pointer; padding: 0 15px; z-index: 10; }
 
-/* MODAL (POPUP ẨN) */
+/* --- MODAL (POPUP) --- */
 .modal-overlay {
     display: none; /* Mặc định ẩn */
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.95); z-index: 9999;
     justify-content: center; align-items: center; backdrop-filter: blur(10px);
 }
+
 .modal-content {
     width: 90%; 
-    max-width: 1000px; 
-    height: 85vh; /* Chiều cao cố định bằng 85% màn hình */
+    max-width: 1100px; 
+    height: 85vh; /* Chiều cao cố định bằng 85% màn hình => ĐIỀU KIỆN ĐỂ CÓ THANH TRƯỢT */
     background: #0a0a0a; 
     border: 1px solid var(--accent-color);
     border-radius: 15px; 
     display: flex; 
-    flex-direction: column; /* Xếp dọc: Đầu trang trên, lưới dưới */
-    padding: 25px; 
+    flex-direction: column; /* Xếp dọc */
+    padding: 0; /* Xóa padding để video tràn viền đẹp hơn */
     box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
-    overflow: hidden; /* Cực kỳ quan trọng: Cắt bỏ phần thừa để thanh trượt nằm bên trong */
+    overflow: hidden; /* Ẩn phần thừa lòi ra ngoài khung bo tròn */
 }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+
+/* Phần đầu (Tiêu đề + Tìm kiếm) giữ cố định */
+.modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 30px; border-bottom: 1px solid #333;
+    background: #0a0a0a; /* Nền đen để che nội dung khi trượt qua */
+    z-index: 10;
+    flex-shrink: 0; /* Không cho phép phần này bị co lại */
+}
+
 .search-box { flex-grow: 1; margin: 0 30px; position: relative; }
 .search-box input {
     width: 100%; padding: 12px 40px 12px 20px; 
@@ -177,39 +187,53 @@ nav a:hover { color: var(--accent-color); }
 .search-box input:focus { border-color: var(--accent-color); }
 .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #888; }
 .close-modal { background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
+
+/* Phần thân (Danh sách video) - Nơi chứa thanh trượt */
 .modal-grid-body {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Ô to hơn (350px) để video full size */
+    gap: 30px; 
+    padding: 30px; 
     
-    /* CÁC DÒNG QUAN TRỌNG ĐỂ TẠO THANH TRƯỢT BÊN TRONG */
-    flex: 1;          /* Chiếm hết khoảng trống còn lại bên dưới thanh tìm kiếm */
-    overflow-y: auto; /* Hiện thanh trượt dọc khi nội dung dài */
-    min-height: 0;    /* Bắt buộc có để trượt mượt trên Firefox/Chrome */
-    
-    padding-right: 10px; /* Chừa chỗ cho thanh trượt đẹp hơn */
-    padding-bottom: 20px;
+    /* TẠO THANH TRƯỢT NỘI BỘ */
+    overflow-y: auto; /* Chỉ hiện thanh trượt ở khu vực này */
+    flex-grow: 1; /* Chiếm hết phần còn lại của khung */
+    scroll-behavior: smooth;
 }
 
-/* =========================================
-   6. STATS & FOOTER (CŨNG BỊ MẤT NÊN THÊM LẠI)
-========================================= */
-.stats-grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
-.stat-card { text-align: center; margin: 20px; }
-.stat-card .number { font-size: 3rem; font-weight: 700; color: var(--accent-color); }
-footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #888; }
+/* Tùy chỉnh thanh trượt cho đẹp (Chrome/Safari) */
+.modal-grid-body::-webkit-scrollbar { width: 8px; }
+.modal-grid-body::-webkit-scrollbar-track { background: #111; }
+.modal-grid-body::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
 
-/* =========================================
-   7. TRANG CHI TIẾT (DETAIL PAGE)
-========================================= */
-.detail-page { max-width: 900px; }
-.detail-image { width: 100%; height: auto; border-radius: 10px; margin-bottom: 30px; border: 1px solid #333; box-shadow: 0 0 20px rgba(0, 240, 255, 0.1); }
-.detail-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; color: #fff; }
-.detail-meta { font-family: var(--font-tech); color: #888; margin-bottom: 30px; font-size: 0.9rem; }
-.btn-detail { 
-    display: inline-block; background-color: #008CBA; color: white; 
-    padding: 12px 25px; text-decoration: none; border-radius: 4px; 
-    font-weight: 500; margin-bottom: 30px; transition: background 0.3s; 
+/* Thẻ chứa Video trong Popup */
+.modal-grid-body .music-card {
+    background: transparent; /* Bỏ nền đen */
+    border: none; /* Bỏ viền */
+    padding: 0; /* Bỏ khoảng cách */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: none;
 }
-.btn-detail:hover { background-color: #00aaff; }
-.detail-desc { font-size: 1.1rem; color: #ccc; line-height: 1.8; text-align: justify; }
+
+/* Video tràn viền - FULL KÍCH THƯỚC */
+.modal-grid-body .video-embed {
+    width: 100%;
+    aspect-ratio: 16/9; /* Tỷ lệ chuẩn Youtube */
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: block;
+    object-fit: cover;
+}
+
+/* Tên bài hát */
+.modal-grid-body .music-info {
+    padding: 15px 5px 0 5px;
+}
+.modal-grid-body .music-title {
+    font-size: 1.1rem;
+    color: #fff;
+    white-space: nowrap; /* Không xuống dòng */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiện dấu ... nếu tên quá dài */
+}
