@@ -1,10 +1,11 @@
 :root {
     --bg-color: #050505;
     --text-color: #e0e0e0;
-    --accent-color: #00f0ff; /* Màu xanh neon tech */
+    --accent-color: #00f0ff;
     --border-color: #333;
-    --font-main: 'Rajdhani', sans-serif;
-    --font-tech: 'Roboto Mono', monospace;
+    /* Đổi cả hai biến font về Roboto */
+    --font-main: 'Roboto', sans-serif;
+    --font-tech: 'Roboto', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
