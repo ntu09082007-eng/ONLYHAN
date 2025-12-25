@@ -125,3 +125,59 @@ nav a:hover { color: var(--accent-color); }
 
 /* Footer */
 footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #888; }
+/* --- CSS CHO TRANG CHI TIẾT (EVENT DETAIL) --- */
+.detail-page {
+    max-width: 900px; /* Thu hẹp lại một chút cho dễ đọc */
+}
+
+.detail-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+}
+
+.detail-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.detail-meta {
+    font-family: var(--font-tech);
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+/* Nút "Thông tin chi tiết" màu xanh */
+.btn-detail {
+    display: inline-block;
+    background-color: #008CBA; /* Màu xanh giống ảnh mẫu */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    transition: background 0.3s;
+}
+
+.btn-detail:hover {
+    background-color: #00aaff;
+}
+
+.detail-desc {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* Hiệu ứng trỏ chuột ở trang danh sách để biết là click được */
+.event-card {
+    cursor: pointer; 
+}
