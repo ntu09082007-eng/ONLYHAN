@@ -1,14 +1,14 @@
 // CẤU HÌNH SUPABASE
 const supabaseUrl = 'https://srajbfixapsjnmsdldve.supabase.co'; // Dán URL vào đây
 const supabaseKey = 'sb_publishable_aUPBpRiK4YfjgB7JYw_WSQ_GZd-zSrp'; // Dán Anon Key vào đây
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Hàm lấy dữ liệu Sự kiện
 async function fetchEvents() {
     const listElement = document.getElementById('event-list');
     
     // Gọi database
-    const { data, error } = await supabase
+const { data, error } = await supabaseClient
         .from('events')
         .select('*')
         .order('id', { ascending: false });
