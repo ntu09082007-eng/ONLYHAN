@@ -52,7 +52,36 @@
                 Rơi Tự Do - Solo ra mắt ngày 06/08/2025 - Solo chung kết Em Xinh Say Hi</p><br>
             <p>LyHan chính thức phát hành album đầu tay mang tên “Tâm Linh”, mang đến một hành trình âm nhạc đậm chất điện ảnh. Nơi bóng tối và ánh sáng hòa quyện vào nhau tạo thành bức tranh cảm xúc vừa mong manh, vừa mạnh mẽ. Album bao gồm tổng cộng 8 bài hát, lần lượt là “Chim Hót Bên Trong Lâu Đài”, “Bóng Tối Yêu Đời”, tiếp đến là “Chằn Tinh”, “Rơi Tự Do”, “Nhân Danh Tình Yêu”, hay “Vật Đổi Sao Dời”, “Vũ Trụ Song Song” và cuối cùng là “Welcome Home” tiếp tục dẫn dắt người nghe đi qua những hành trình cảm xúc, từ tổn thương cho đến chữa lành, từ cô đơn cho đến bình yên.</p>
         </section>
+<section id="music" class="container">
+            <div class="music-header">
+                <h2 class="section-title">SẢN PHẨM ÂM NHẠC</h2>
+                <button id="btn-show-all" class="btn-tech-sm">⊞ Hiển thị tất cả</button>
+            </div>
 
+            <div class="carousel-wrapper">
+                <button class="nav-btn prev-btn" onclick="scrollCarousel(-1)">❮</button>
+                <div id="music-carousel" class="carousel-container">
+                    <div class="loading">Đang tải Music Video...</div>
+                </div>
+                <button class="nav-btn next-btn" onclick="scrollCarousel(1)">❯</button>
+            </div>
+        </section>
+
+        <div id="music-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>⊞ TẤT CẢ SẢN PHẨM ÂM NHẠC</h3>
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Tìm kiếm bài hát...">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                    <button class="close-modal" onclick="closeModal()">✕</button>
+                </div>
+                
+                <div id="modal-grid" class="modal-grid-body">
+                    </div>
+            </div>
+        </div>
         <section id="events" class="container">
             <h2 class="section-title">SỰ KIỆN & LỊCH TRÌNH</h2>
             <div id="event-list" class="grid-layout">
