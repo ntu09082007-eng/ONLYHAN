@@ -37,7 +37,16 @@ body {
     position: fixed; font-family: var(--font-tech); font-size: 0.7rem; color: var(--accent-color); opacity: 0.8; z-index: 100;
 }
 .top-left { top: 20px; left: 20px; border: 1px solid var(--accent-color); padding: 5px; }
-.top-right { top: 90px; right: 20px; }
+/* Tìm và sửa đoạn này */
+.top-right { 
+    /* Đẩy xuống hẳn 90px (Bắt buộc) */
+    top: 90px !important;  
+    
+    right: 20px; 
+    
+    /* (Tùy chọn) Thêm nền mờ để chữ dễ đọc hơn nếu bị trùng hình nền */
+    /* background: rgba(0,0,0,0.5); padding: 5px; border-radius: 4px; */
+}
 .bottom-left { bottom: 20px; left: 20px; }
 .bottom-right { bottom: 20px; right: 20px; }
 
