@@ -4,10 +4,12 @@
 :root {
     --bg-color: #050505;
     --text-color: #e0e0e0;
-    --accent-color: #00f0ff; /* Màu xanh neon chủ đạo */
+    --accent-color: #00f0ff;
     --border-color: #333;
-    --font-main: 'Roboto', sans-serif;
-    --font-tech: 'Roboto', sans-serif;
+    
+    /* Đổi font chữ toàn bộ web về Montserrat */
+    --font-main: 'Montserrat', sans-serif;
+    --font-tech: 'Montserrat', sans-serif; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
