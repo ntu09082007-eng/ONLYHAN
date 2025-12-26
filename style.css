@@ -58,7 +58,25 @@ header {
     padding: 20px 40px; border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(5px); position: sticky; top: 0; z-index: 50;
 }
-.logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
+/* Tìm đoạn này trong style.css */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    
+    /* --- THÊM 2 DÒNG NÀY ĐỂ CĂN GIỮA --- */
+    display: flex;      /* Kích hoạt chế độ Flexbox */
+    align-items: center; /* Căn giữa logo và chữ theo chiều dọc (cho thẳng hàng) */
+}
+/* --- THÊM ĐOẠN NÀY ĐỂ TẠO KHOẢNG CÁCH --- */
+.logo img {
+    /* Đẩy chữ ONLYHAN sang bên phải 20px (Bạn có thể tăng lên 30px nếu muốn xa hơn) */
+    margin-right: 20px; 
+    
+    /* Đảm bảo ảnh không bị méo */
+    height: 40px; /* Chiều cao cố định (bạn có thể chỉnh to nhỏ tùy ý) */
+    width: auto;  /* Chiều rộng tự động */
+}
 .highlight { color: var(--accent-color); }
 /* Style mặc định cho các nút trên menu */
 nav a {
