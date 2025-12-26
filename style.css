@@ -481,10 +481,20 @@ footer {
 /* =========================================
    CONTACT FORM (GIAO DIỆN GIỐNG ẢNH MẪU)
 ========================================= */
+/* =========================================
+   CONTACT FORM - ĐÃ CHỈNH SỬA CĂN LỀ
+========================================= */
 #contact {
-    max-width: 800px; /* Giới hạn chiều rộng cho đẹp */
+    max-width: 1100px; /* QUAN TRỌNG: Đổi từ 800px thành 1100px để bằng khung trên */
+    margin: 0 auto;    /* Căn giữa trang web */
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/* Thêm đoạn này để giới hạn độ rộng của các ô nhập liệu cho đẹp (nếu muốn) */
+.contact-form {
+    max-width: 800px; /* Giữ form gọn gàng ở mức 800px */
+    /* margin: 0 auto;  <-- Nếu bạn muốn form nằm giữa thì bỏ dấu comment dòng này */
 }
 
 /* Tìm đoạn .contact-title cũ và xóa đi, dán đè đoạn này vào */
