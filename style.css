@@ -94,6 +94,12 @@ nav a:hover { color: var(--accent-color); }
     font-size: 0.9rem;
     line-height: 1.5;
     text-shadow: 1px 1px 2px #000;
+    
+    /* --- DÒNG QUAN TRỌNG ĐỂ CĂN ĐỀU 2 BÊN --- */
+    text-align: justify; 
+    
+    /* (Tùy chọn) Thêm dòng này để ngăn chữ bị kéo giãn quá mức */
+    text-justify: inter-word; 
 }
 
 /* Ẩn trên điện thoại cho đỡ rối */
