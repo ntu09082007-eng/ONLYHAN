@@ -7,9 +7,9 @@
     --accent-color: #00f0ff;
     --border-color: #333;
     
-    /* Đổi font chữ toàn bộ web về Montserrat */
-    --font-main: 'Montserrat', sans-serif;
-    --font-tech: 'Montserrat', sans-serif; 
+    /* Đổi font chữ toàn bộ web về Quicksand */
+    --font-main: 'Quicksand', sans-serif;
+    --font-tech: 'Quicksand', sans-serif; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
