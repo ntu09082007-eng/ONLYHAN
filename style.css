@@ -76,14 +76,12 @@ nav a:hover { color: var(--accent-color); }
 .hero-intro-box {
     position: absolute;
     
-    /* --- SỬA DÒNG NÀY --- */
-    bottom: 180px;  /* Đẩy lên cao 180px để tách biệt hẳn với phần chân trang */
+    /* --- SỬA LẠI DÒNG NÀY --- */
+    bottom: 80px;  /* Đưa về 80px như cũ (thay vì 180px) */
     
     left: 60px;
     max-width: 450px;
-    text-align: justify; /* Căn đều 2 bên như bạn thích */
-    
-    /* Dòng này sẽ tự động ăn theo màu Xám Bạc ở trên */
+    text-align: justify;
     border-left: 4px solid var(--accent-color); 
     z-index: 20;
 }
