@@ -71,13 +71,12 @@ nav a:hover { color: var(--accent-color); }
     justify-content: center; align-items: center; text-align: center;
     position: relative;
 }
-/* Tìm đoạn này và sửa lại dòng border-left */
-/* Tìm đoạn này trong style.css */
+/* Tìm đoạn này và sửa lại dòng bottom */
 .hero-intro-box {
     position: absolute;
     
-    /* --- SỬA DÒNG NÀY --- */
-    bottom: 180px;  /* Tăng lên 180px để nó bay cao lên, tách xa dòng chữ dưới đáy */
+    /* --- SỬA DÒNG NÀY TĂNG LÊN 180PX --- */
+    bottom: 180px;  /* Đẩy lên cao để tạo khoảng trống thoáng đãng như Ảnh 2 */
     
     left: 60px;
     max-width: 450px;
