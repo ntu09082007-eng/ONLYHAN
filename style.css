@@ -4,12 +4,13 @@
 :root {
     --bg-color: #050505;
     --text-color: #e0e0e0;
-    --accent-color: #00f0ff;
-    --border-color: #333;
     
-    /* Đổi font chữ toàn bộ web về Quicksand */
-    --font-main: 'Quicksand', sans-serif;
-    --font-tech: 'Quicksand', sans-serif; 
+    /* --- THAY DÒNG NÀY --- */
+    --accent-color: #ff0000; /* Đổi từ #00f0ff sang #ff0000 (MÀU ĐỎ) */
+    
+    --border-color: #333;
+    --font-main: 'Quicksand', sans-serif; /* Giữ font Quicksand bạn vừa chọn */
+    --font-tech: 'Quicksand', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,26 +70,20 @@ nav a:hover { color: var(--accent-color); }
     justify-content: center; align-items: center; text-align: center;
     position: relative;
 }
-/* Khung giới thiệu góc trái */
+/* Tìm đoạn này và sửa lại dòng border-left */
 .hero-intro-box {
-    position: absolute;
-    bottom: 80px;  /* Cách đáy 80px */
-    left: 60px;    /* Cách trái 60px */
-    max-width: 450px;
-    text-align: left; /* Chữ căn trái */
+    /* ... giữ nguyên các dòng khác ... */
     
-    /* Thanh gạch dọc màu hồng */
-    border-left: 4px solid #ff0055; 
-    padding-left: 20px;
-    z-index: 20;
+    /* Sửa thành var(--accent-color) để nó tự động lấy màu đỏ ở trên */
+    border-left: 4px solid var(--accent-color); 
 }
 
+/* Tìm đoạn này và sửa lại dòng color */
 .intro-title {
-    color: #ff0055; /* Tiêu đề màu hồng */
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    text-shadow: 2px 2px 4px #000;
+    /* Sửa thành var(--accent-color) */
+    color: var(--accent-color); 
+    
+    /* ... giữ nguyên các dòng khác ... */
 }
 
 .intro-text {
