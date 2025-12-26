@@ -110,7 +110,7 @@ nav a:hover {
     position: absolute;
     
     /* --- SỬA DÒNG NÀY TĂNG LÊN 180PX --- */
-    bottom: 100px;  /* Đẩy lên cao để tạo khoảng trống thoáng đãng như Ảnh 2 */
+    bottom: 150px;  /* Đẩy lên cao để tạo khoảng trống thoáng đãng như Ảnh 2 */
     
     left: 60px;
     max-width: 450px;
