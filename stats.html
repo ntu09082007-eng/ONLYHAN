@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê số liệu | ONLYHAN - ALL FOR LYHAN</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">ONLYHAN - <span class="highlight">ALL FOR</span> LYHAN</div>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="stats.html" class="active">Thống kê</a>
+        </nav>
+    </header>
+
+    <main class="stats-main">
+        <div class="glass-container">
+            <h1 class="stats-header">Thống kê YouTube & Platforms</h1>
+            
+            <div class="stats-search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="stats-search" placeholder="Tìm kiếm bài hát, album...">
+            </div>
+
+            <div id="stats-grid" class="stats-grid-container">
+                <div class="loading">Đang kết nối API dữ liệu...</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Cấu hình Supabase (Dùng lại key cũ của bạn)
+        const supabaseUrl = 'https://srajbfixapsjnmsdldve.supabase.co';
+        const supabaseKey = 'sb_publishable_aUPBpRiK4YfjgB7JYw_WSQ_GZd-zSrp';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function loadStats() {
+            const { data, error } = await supabase.from('track_stats').select('*');
+            const grid = document.getElementById('stats-grid');
+            grid.innerHTML = '';
+
+            if (error) { grid.innerHTML = 'Lỗi tải dữ liệu'; return; }
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-card';
+                card.innerHTML = `
+                    <div class="card-img-box">
+                        <img src="${item.image_url}" alt="${item.title}">
+                        <div class="card-overlay">
+                            <button onclick="window.location.href='stats-detail.html?id=${item.id}'" class="btn-view-green">
+                                Xem Chi Tiết
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-meta">
+                            <div class="meta-row"><span>Lượt xem:</span> <span class="val-blue">${item.view_count.toLocaleString()}</span></div>
+                            <div class="meta-row"><span>Lượt thích:</span> <span class="val-green">${item.like_count.toLocaleString()}</span></div>
+                            <div class="meta-row"><span>Bình luận:</span> <span class="val-yellow">${item.comment_count.toLocaleString()}</span></div>
+                        </div>
+                        <div class="card-date">Thêm vào: ${item.upload_date}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        loadStats();
+    </script>
+</body>
+</html>
