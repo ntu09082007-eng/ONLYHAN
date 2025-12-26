@@ -105,14 +105,17 @@ nav a:hover {
     text-justify: inter-word; 
 }
 /* --- DÁN ĐOẠN CODE MỚI VÀO ĐÂY --- */
+/* Tìm đoạn này và sửa lại dòng bottom */
 .hero-intro-box {
     position: absolute;
-    bottom: 100px;
+    
+    /* --- SỬA DÒNG NÀY TĂNG LÊN 180PX --- */
+    bottom: 180px;  /* Đẩy lên cao để tạo khoảng trống thoáng đãng như Ảnh 2 */
+    
     left: 60px;
     max-width: 450px;
     text-align: justify;
-    border-left: 4px solid var(--accent-color);
-    padding-left: 40px;
+    border-left: 4px solid var(--accent-color); 
     z-index: 20;
 }
 
