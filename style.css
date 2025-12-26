@@ -491,10 +491,11 @@ footer {
     margin-bottom: 50px;
 }
 
-/* Thêm đoạn này để giới hạn độ rộng của các ô nhập liệu cho đẹp (nếu muốn) */
+/* Canh giữa khung nhập liệu */
 .contact-form {
-    max-width: 800px; /* Giữ form gọn gàng ở mức 800px */
-    /* margin: 0 auto;  <-- Nếu bạn muốn form nằm giữa thì bỏ dấu comment dòng này */
+    max-width: 700px; /* Giới hạn chiều rộng form lại (700px là đẹp nhất) */
+    margin: 0 auto;   /* Lệnh thần thánh để đưa khung ra GIỮA */
+    display: block;   /* Đảm bảo nó là khối block để căn giữa được */
 }
 
 /* Tìm đoạn .contact-title cũ và xóa đi, dán đè đoạn này vào */
