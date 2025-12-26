@@ -63,9 +63,9 @@ nav a:hover { color: var(--accent-color); }
 }
 
 #hero {
-   height: 90vh; display: flex; flex-direction: column; 
-   justify-content: center; align-items: center; text-align: center;
-   position: relative;
+    height: 90vh; display: flex; flex-direction: column; 
+    justify-content: center; align-items: center; text-align: center;
+    position: relative;
 }
 /* Khung giới thiệu góc trái */
 .hero-intro-box {
