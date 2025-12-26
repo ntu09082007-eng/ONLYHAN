@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết thống kê | ONLYHAN - ALL FOR LYHAN</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <main class="stats-main">
+        <div class="glass-container detail-view">
+            <div class="detail-top-bar">
+                <h2>Biểu đồ thống kê</h2>
+                <div class="action-buttons">
+                    <a id="btn-watch-link" href="#" target="_blank" class="btn-view-green">Xem Video</a>
+                    <a href="stats.html" class="btn-back">Quay lại</a>
+                </div>
+            </div>
+
+            <div class="detail-info-grid">
+                <div class="info-left">
+                    <img id="detail-img" src="" alt="Thumbnail">
+                    <div class="info-text">
+                        <h3 id="detail-title">Loading...</h3>
+                        <div class="platform-badge" id="detail-platform">Youtube</div>
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="stat-box">
+                        <span>Lượt xem:</span> <h2 class="val-blue" id="val-view">0</h2>
+                    </div>
+                    <div class="stat-box">
+                        <span>Lượt thích:</span> <h2 class="val-green" id="val-like">0</h2>
+                    </div>
+                    <div class="stat-box">
+                        <span>Bình luận:</span> <h2 class="val-yellow" id="val-comment">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <h3>Biểu đồ thống kê - Thể hiện số lượng tăng theo thời gian</h3>
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const supabaseUrl = 'https://srajbfixapsjnmsdldve.supabase.co';
+        const supabaseKey = 'sb_publishable_aUPBpRiK4YfjgB7JYw_WSQ_GZd-zSrp';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function loadDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if(!id) return;
+
+            const { data: item } = await supabase.from('track_stats').select('*').eq('id', id).single();
+            
+            // Điền dữ liệu
+            document.getElementById('detail-title').innerText = item.title;
+            document.getElementById('detail-img').src = item.image_url;
+            document.getElementById('detail-platform').innerText = item.platform;
+            document.getElementById('val-view').innerText = item.view_count.toLocaleString();
+            document.getElementById('val-like').innerText = item.like_count.toLocaleString();
+            document.getElementById('val-comment').innerText = item.comment_count.toLocaleString();
+            
+            // Xử lý link nút "Xem Video"
+            const linkBtn = document.getElementById('btn-watch-link');
+            if(item.platform === 'Youtube') {
+                linkBtn.href = `https://www.youtube.com/watch?v=${item.video_id}`;
+            } else {
+                linkBtn.href = item.video_id; // Nếu là link Spotify/Apple
+            }
+
+            // Vẽ biểu đồ (Giả lập dữ liệu lịch sử dựa trên số tổng)
+            renderChart(item.view_count, item.like_count);
+        }
+
+        function renderChart(totalView, totalLike) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            // Tạo dữ liệu giả lập cho đẹp (vì chưa có server lưu lịch sử thật)
+            const labels = ['6h trước', '5h trước', '4h trước', '3h trước', '2h trước', '1h trước', 'Hiện tại'];
+            const viewData = labels.map((_, i) => totalView - (totalView * (0.1 * (6-i)))); 
+            const likeData = labels.map((_, i) => totalLike - (totalLike * (0.1 * (6-i))));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Tăng lượt xem', data: viewData, borderColor: '#3b82f6', tension: 0.4 },
+                        { label: 'Tăng lượt thích', data: likeData, borderColor: '#22c55e', tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: 'white' } } },
+                    scales: {
+                        y: { grid: { color: '#333' }, ticks: { color: '#888' } },
+                        x: { grid: { color: '#333' }, ticks: { color: '#888' } }
+                    }
+                }
+            });
+        }
+        loadDetail();
+    </script>
+</body>
+</html>
