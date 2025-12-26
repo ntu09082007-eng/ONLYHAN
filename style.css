@@ -478,3 +478,79 @@ footer {
     .detail-info-grid { flex-direction: column; }
     .info-left img { width: 100%; }
 }
+/* =========================================
+   CONTACT FORM (GIAO DIỆN GIỐNG ẢNH MẪU)
+========================================= */
+#contact {
+    max-width: 800px; /* Giới hạn chiều rộng cho đẹp */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.contact-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 40px;
+    font-weight: 400; /* Font mảnh giống mẫu */
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Ô nhập liệu nền xám trong suốt */
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.2); /* Nền trắng mờ */
+    border: none; /* Bỏ viền */
+    border-radius: 4px;
+    color: #fff; /* Chữ khi gõ màu trắng */
+    font-family: var(--font-main);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Hiệu ứng khi bấm vào ô nhập */
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* Màu chữ placeholder (chữ gợi ý mờ mờ) */
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Nút Submit trắng bo tròn */
+.btn-submit {
+    background-color: #fff;
+    color: #000;
+    font-weight: 700;
+    padding: 12px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: block;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-color); /* Hover chuyển màu xanh */
+    box-shadow: 0 0 20px var(--accent-color);
+}
