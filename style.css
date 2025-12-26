@@ -72,16 +72,23 @@ nav a:hover { color: var(--accent-color); }
     position: relative;
 }
 /* Tìm đoạn này và sửa lại dòng bottom */
+/* Tìm đoạn này và dán đè vào */
 .hero-intro-box {
     position: absolute;
     
-    /* --- SỬA DÒNG NÀY TĂNG LÊN 180PX --- */
-    bottom: 180px;  /* Đẩy lên cao để tạo khoảng trống thoáng đãng như Ảnh 2 */
+    /* 1. Đưa xuống thấp (cách đáy 100px là đẹp, không bị dính vào dòng chữ COORD ở dưới) */
+    bottom: 100px;  
     
     left: 60px;
     max-width: 450px;
     text-align: justify;
+    
+    /* Đường kẻ màu xám */
     border-left: 4px solid var(--accent-color); 
+    
+    /* 2. TÁCH CHỮ VÀ ĐƯỜNG KẺ RA XA (Tăng từ 20px lên 40px) */
+    padding-left: 40px; 
+    
     z-index: 20;
 }
 
