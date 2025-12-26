@@ -610,3 +610,10 @@ footer {
     background-color: var(--accent-color); /* Hover chuyển màu xanh */
     box-shadow: 0 0 20px var(--accent-color);
 }
+/* Căn đều lề cho phần Giới thiệu (Hành trình khởi đầu) */
+#about p {
+    text-align: justify;       /* Căn đều 2 bên trái phải */
+    text-justify: inter-word;  /* Điều chỉnh khoảng cách từ cho đẹp */
+    margin-bottom: 20px;       /* Tạo khoảng cách thoáng giữa các đoạn văn */
+    line-height: 1.6;          /* Giãn dòng ra một chút cho dễ đọc */
+}
