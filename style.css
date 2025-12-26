@@ -71,27 +71,6 @@ nav a:hover { color: var(--accent-color); }
     justify-content: center; align-items: center; text-align: center;
     position: relative;
 }
-/* Tìm đoạn này và sửa lại dòng bottom */
-/* Tìm đoạn này và dán đè vào */
-.hero-intro-box {
-    position: absolute;
-    
-    /* 1. Đưa xuống thấp (cách đáy 100px là đẹp, không bị dính vào dòng chữ COORD ở dưới) */
-    bottom: 100px;  
-    
-    left: 60px;
-    max-width: 450px;
-    text-align: justify;
-    
-    /* Đường kẻ màu xám */
-    border-left: 4px solid var(--accent-color); 
-    
-    /* 2. TÁCH CHỮ VÀ ĐƯỜNG KẺ RA XA (Tăng từ 20px lên 40px) */
-    padding-left: 40px; 
-    
-    z-index: 20;
-}
-
 /* Kiểm tra cả đoạn này nữa */
 .intro-title {
     color: var(--accent-color); /* Đảm bảo nó dùng biến màu chung */
