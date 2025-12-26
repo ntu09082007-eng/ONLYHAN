@@ -96,9 +96,16 @@ nav a:hover {
     position: relative;
 }
 /* Kiểm tra cả đoạn này nữa */
+/* Tìm đoạn này trong style.css */
 .intro-title {
-    color: var(--accent-color); /* Đảm bảo nó dùng biến màu chung */
-    /* ... các dòng khác giữ nguyên ... */
+    color: var(--accent-color); /* Màu xám bạc hiện tại */
+    
+    /* --- SỬA DÒNG NÀY --- */
+    font-size: 1.4rem; /* Tăng từ 1.1rem lên 1.4rem cho to và rõ hơn */
+    
+    font-weight: 700; /* Chữ đậm */
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px #000; /* Bóng đen giúp chữ nổi trên nền ảnh */
 }
 
 .intro-text {
