@@ -116,7 +116,7 @@ nav a:hover {
     max-width: 450px;
     text-align: justify;
     border-left: 4px solid var(--accent-color); 
-    padding-left: 15px;
+    padding-left: 20px;
     z-index: 20;
 }
 
