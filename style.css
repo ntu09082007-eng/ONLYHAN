@@ -487,12 +487,17 @@ footer {
     margin-bottom: 50px;
 }
 
+/* Tìm đoạn .contact-title cũ và xóa đi, dán đè đoạn này vào */
 .contact-title {
-    text-align: center;
-    font-size: 2.5rem;
+    text-align: left; /* Canh trái để giống các mục khác */
+    font-size: 2rem;
+    font-weight: 700; /* Chữ đậm */
     color: #fff;
-    margin-bottom: 40px;
-    font-weight: 400; /* Font mảnh giống mẫu */
+    margin-bottom: 30px;
+    text-transform: uppercase; /* Tự động viết hoa chữ Contact -> CONTACT */
+    border-left: 4px solid var(--accent-color); /* Tạo thanh gạch dọc màu xanh neon */
+    padding-left: 15px; /* Khoảng cách giữa thanh gạch và chữ */
+    line-height: 1; /* Căn chỉnh chiều cao dòng cho thanh gạch đẹp hơn */
 }
 
 .contact-form .form-group {
