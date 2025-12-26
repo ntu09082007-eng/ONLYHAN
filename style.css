@@ -5,12 +5,11 @@
     --bg-color: #050505;
     --text-color: #e0e0e0;
     
-    /* --- THAY DÒNG NÀY --- */
-    --accent-color: #ff0000; /* Đổi từ #00f0ff sang #ff0000 (MÀU ĐỎ) */
+    /* --- SỬA DÒNG NÀY --- */
+    --accent-color: #00f0ff; /* Đổi từ #ff0000 về lại #00f0ff (Xanh Neon) */
     
     --border-color: #333;
-    --font-main: 'Quicksand', sans-serif; /* Giữ font Quicksand bạn vừa chọn */
-    --font-tech: 'Quicksand', sans-serif;
+    /* Các dòng font chữ giữ nguyên */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,19 +70,26 @@ nav a:hover { color: var(--accent-color); }
     position: relative;
 }
 /* Tìm đoạn này và sửa lại dòng border-left */
+/* Tìm đoạn này trong style.css */
 .hero-intro-box {
-    /* ... giữ nguyên các dòng khác ... */
+    position: absolute;
     
-    /* Sửa thành var(--accent-color) để nó tự động lấy màu đỏ ở trên */
+    /* --- SỬA DÒNG NÀY --- */
+    bottom: 180px;  /* Tăng từ 80px lên 180px để né cái HUD bên dưới ra */
+    
+    left: 60px;
+    max-width: 450px;
+    text-align: left;
+    
+    /* Đảm bảo 2 dòng này đang dùng var(--accent-color) */
     border-left: 4px solid var(--accent-color); 
+    z-index: 20;
 }
 
-/* Tìm đoạn này và sửa lại dòng color */
+/* Kiểm tra cả đoạn này nữa */
 .intro-title {
-    /* Sửa thành var(--accent-color) */
-    color: var(--accent-color); 
-    
-    /* ... giữ nguyên các dòng khác ... */
+    color: var(--accent-color); /* Đảm bảo nó dùng biến màu chung */
+    /* ... các dòng khác giữ nguyên ... */
 }
 
 .intro-text {
