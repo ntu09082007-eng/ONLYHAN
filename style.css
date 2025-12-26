@@ -76,8 +76,8 @@ nav a:hover { color: var(--accent-color); }
 .hero-intro-box {
     position: absolute;
     
-    /* --- SỬA LẠI DÒNG NÀY --- */
-    bottom: 80px;  /* Đưa về 80px như cũ (thay vì 180px) */
+    /* --- SỬA DÒNG NÀY --- */
+    bottom: 180px;  /* Tăng lên 180px để nó bay cao lên, tách xa dòng chữ dưới đáy */
     
     left: 60px;
     max-width: 450px;
