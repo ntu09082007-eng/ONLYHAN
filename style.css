@@ -36,7 +36,7 @@ body {
 .hud-overlay div {
     position: fixed; font-family: var(--font-tech); font-size: 0.7rem; color: var(--accent-color); opacity: 0.8; z-index: 100;
 }
-.top-left { top: 20px; left: 20px; border: 1px solid var(--accent-color); padding: 5px; }
+.top-left { top: 20px; left: 20px; }
 /* Tìm và sửa đoạn này */
 .top-right { 
     /* Đẩy xuống hẳn 90px (Bắt buộc) */
