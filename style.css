@@ -147,95 +147,137 @@ nav a:hover { color: var(--accent-color); }
 .music-composer { font-size: 0.8rem; color: #888; margin-top: 5px; }
 .nav-btn { background: transparent; color: var(--accent-color); border: none; font-size: 2rem; cursor: pointer; padding: 0 15px; z-index: 10; }
 
-/* --- MODAL (POPUP) --- */
+/* =======================================================
+   MODAL (POPUP) - GIAO DIỆN MỚI GIỐNG ẢNH 2 & 3
+======================================================= */
 .modal-overlay {
     display: none; /* Mặc định ẩn */
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); z-index: 9999;
-    justify-content: center; align-items: center; backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.85); /* Nền tối mờ phía sau */
+    z-index: 9999;
+    justify-content: center; align-items: center;
+    backdrop-filter: blur(5px);
 }
 
+/* Khung chính: Màu xám đen (#121212), bo góc tròn (24px) */
 .modal-content {
-    width: 90%; 
-    max-width: 1100px; 
-    height: 85vh; /* Chiều cao cố định bằng 85% màn hình => ĐIỀU KIỆN ĐỂ CÓ THANH TRƯỢT */
-    background: #0a0a0a; 
-    border: 1px solid var(--accent-color);
-    border-radius: 15px; 
-    display: flex; 
-    flex-direction: column; /* Xếp dọc */
-    padding: 0; /* Xóa padding để video tràn viền đẹp hơn */
-    box-shadow: 0 0 50px rgba(0, 240, 255, 0.1);
-    overflow: hidden; /* Ẩn phần thừa lòi ra ngoài khung bo tròn */
+    width: 90%; max-width: 1100px; height: 85vh;
+    background: #121212; /* Màu nền giống ảnh mẫu */
+    border: 1px solid #333; /* Viền xám tinh tế (bỏ viền xanh lè cũ) */
+    border-radius: 24px; /* Bo góc mềm mại */
+    display: flex; flex-direction: column;
+    padding: 0;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Cắt bỏ phần thừa */
 }
 
-/* Phần đầu (Tiêu đề + Tìm kiếm) giữ cố định */
+/* --- PHẦN ĐẦU (HEADER) --- */
 .modal-header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 30px; border-bottom: 1px solid #333;
-    background: #0a0a0a; /* Nền đen để che nội dung khi trượt qua */
+    padding: 20px 30px;
+    background: #121212; /* Đồng bộ màu nền */
+    border-bottom: 1px solid #222; /* Đường kẻ mờ ngăn cách */
     z-index: 10;
-    flex-shrink: 0; /* Không cho phép phần này bị co lại */
 }
 
-.search-box { flex-grow: 1; margin: 0 30px; position: relative; }
+/* Tiêu đề "Tất cả sản phẩm..." */
+.modal-header h3 {
+    font-size: 1.5rem; color: #fff; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+    margin: 0;
+}
+/* Icon ô vuông nhỏ bên cạnh tiêu đề */
+.modal-header h3::before { content: '⊞'; color: var(--accent-color); font-size: 1.2rem; }
+
+/* Thanh tìm kiếm (Hình viên thuốc) */
+.search-box {
+    width: 350px; position: relative; margin-right: 20px;
+}
 .search-box input {
-    width: 100%; padding: 12px 40px 12px 20px; 
-    background: #1a1a1a; border: 1px solid #333; color: #fff; 
-    border-radius: 30px; outline: none;
+    width: 100%; padding: 12px 45px 12px 20px;
+    background: #222; /* Nền xám nhạt hơn khung */
+    border: 1px solid #333; color: #fff;
+    border-radius: 50px; /* Bo tròn hình viên thuốc */
+    outline: none; transition: 0.3s;
+    font-family: var(--font-main);
 }
-.search-box input:focus { border-color: var(--accent-color); }
+.search-box input:focus { border-color: var(--accent-color); background: #2a2a2a; }
 .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #888; }
-.close-modal { background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
 
-/* Phần thân (Danh sách video) - Nơi chứa thanh trượt */
+.close-modal { color: #888; font-size: 1.5rem; cursor: pointer; transition: 0.3s; background: none; border: none; }
+.close-modal:hover { color: #fff; }
+
+/* --- PHẦN THÂN (LƯỚI VIDEO) - CÓ THANH TRƯỢT --- */
 .modal-grid-body {
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Ô to hơn (350px) để video full size */
-    gap: 30px; 
-    padding: 30px; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Tự chia cột */
+    gap: 20px;
+    padding: 30px;
     
-    /* TẠO THANH TRƯỢT NỘI BỘ */
-    overflow-y: auto; /* Chỉ hiện thanh trượt ở khu vực này */
-    flex-grow: 1; /* Chiếm hết phần còn lại của khung */
-    scroll-behavior: smooth;
+    /* CẤU HÌNH THANH TRƯỢT DỌC */
+    overflow-y: auto; 
+    flex-grow: 1; /* Chiếm hết khoảng trống còn lại */
 }
 
-/* Tùy chỉnh thanh trượt cho đẹp (Chrome/Safari) */
-.modal-grid-body::-webkit-scrollbar { width: 8px; }
-.modal-grid-body::-webkit-scrollbar-track { background: #111; }
-.modal-grid-body::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
-
-/* Thẻ chứa Video trong Popup */
+/* --- THẺ VIDEO (MUSIC CARD) - GIỐNG ẢNH 2 --- */
 .modal-grid-body .music-card {
-    background: transparent; /* Bỏ nền đen */
-    border: none; /* Bỏ viền */
-    padding: 0; /* Bỏ khoảng cách */
+    background: #1e1e1e; /* Nền thẻ xám (sáng hơn nền khung một chút) */
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: none;
+    transition: transform 0.3s, border-color 0.3s;
+    border: 1px solid #333; /* Viền thẻ mờ */
+    display: flex; flex-direction: column;
+    height: auto;
+    cursor: pointer;
 }
 
-/* Video tràn viền - FULL KÍCH THƯỚC */
+/* HIỆU ỨNG HOVER: Nổi lên + Viền xanh */
+.modal-grid-body .music-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 20px rgba(0, 240, 255, 0.1);
+}
+
+/* Video Embed */
 .modal-grid-body .video-embed {
-    width: 100%;
-    aspect-ratio: 16/9; /* Tỷ lệ chuẩn Youtube */
-    border-radius: 12px;
-    border: 1px solid #333;
+    width: 100%; aspect-ratio: 16/9;
+    border-bottom: 1px solid #333;
     display: block;
-    object-fit: cover;
 }
 
-/* Tên bài hát */
+/* Thông tin bài hát */
 .modal-grid-body .music-info {
-    padding: 15px 5px 0 5px;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex; flex-direction: column; justify-content: center;
 }
+
 .modal-grid-body .music-title {
-    font-size: 1.1rem;
-    color: #fff;
-    white-space: nowrap; /* Không xuống dòng */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Hiện dấu ... nếu tên quá dài */
+    font-size: 1rem; font-weight: 700; color: #fff;
+    margin-bottom: 8px;
+    transition: color 0.3s; /* Chuyển màu mượt */
+}
+
+/* QUAN TRỌNG: ĐỔI MÀU CHỮ KHI DI CHUỘT VÀO THẺ */
+.modal-grid-body .music-card:hover .music-title {
+    color: var(--accent-color); /* Chữ chuyển sang màu xanh neon */
+}
+
+.modal-grid-body .music-composer {
+    font-size: 0.8rem; color: #999;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; /* Cắt bớt nếu dài quá 2 dòng */
+}
+
+/* Tùy chỉnh thanh trượt (Scrollbar) cho đẹp */
+.modal-grid-body::-webkit-scrollbar { width: 6px; }
+.modal-grid-body::-webkit-scrollbar-track { background: #121212; }
+.modal-grid-body::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+.modal-grid-body::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+    .modal-header { flex-direction: column; align-items: stretch; gap: 15px; }
+    .search-box { width: 100%; margin: 0; }
 }
 /* =========================================
    FOOTER STYLE (GIAO DIỆN MỚI 100%)
