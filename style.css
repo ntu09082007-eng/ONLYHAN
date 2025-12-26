@@ -51,11 +51,26 @@ header {
 }
 .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
 .highlight { color: var(--accent-color); }
+/* Style mặc định cho các nút trên menu */
 nav a {
-    color: var(--text-color); text-decoration: none; margin-left: 20px;
-    font-size: 0.9rem; text-transform: uppercase; transition: color 0.3s;
+    color: var(--text-color); /* Màu trắng mặc định */
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600; /* Chữ đậm lên một chút cho rõ */
+    
+    /* Hiệu ứng chuyển màu mượt mà */
+    transition: all 0.3s ease; 
 }
-nav a:hover { color: var(--accent-color); }
+
+/* --- HIỆU ỨNG KHI DI CHUỘT (HOVER) --- */
+nav a:hover {
+    color: #00f0ff; /* Đổi màu chữ sang Xanh Dương Neon */
+    
+    /* Tạo hiệu ứng phát sáng (Glow) */
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; 
+}
 
 /* =========================================
    3. HERO SECTION (PHẦN ĐẦU TRANG)
@@ -89,7 +104,22 @@ nav a:hover { color: var(--accent-color); }
     /* (Tùy chọn) Thêm dòng này để ngăn chữ bị kéo giãn quá mức */
     text-justify: inter-word; 
 }
+/* --- DÁN ĐOẠN CODE MỚI VÀO ĐÂY --- */
+.hero-intro-box {
+    position: absolute;
+    bottom: 100px;
+    left: 60px;
+    max-width: 450px;
+    text-align: justify;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 40px;
+    z-index: 20;
+}
 
+/* Ấn trên điện thoại cho đỡ rối */  /* <-- Dòng 93 cũ sẽ bị đẩy xuống */
+@media (max-width: 768px) {
+    .hero-intro-box { display: none; }
+}
 /* Ẩn trên điện thoại cho đỡ rối */
 @media (max-width: 768px) {
     .hero-intro-box { display: none; }
