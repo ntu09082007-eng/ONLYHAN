@@ -135,13 +135,14 @@ nav a:hover {
 }
 .hero-desc { font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 30px; }
 /* =========================================
-   NÚT "MORE ABOUT LYHAN" (ĐÃ ĐỔI RIÊNG SANG XÁM)
+   NÚT "MORE ABOUT LYHAN" - ÉP MÀU XÁM RIÊNG
 ========================================= */
+/* Tìm đoạn .btn-tech cũ và dán đè đoạn này lên */
 .btn-tech {
     background: transparent;
-    /* Đổi màu chữ và viền sang Xám Bạc (#cfcfcf) */
-    color: #cfcfcf; 
-    border: 1px solid #cfcfcf;
+    /* Dùng mã màu xám cứng ở đây */
+    color: #cfcfcf !important; 
+    border: 1px solid #cfcfcf !important;
     
     padding: 10px 30px;
     font-family: var(--font-tech);
@@ -151,12 +152,10 @@ nav a:hover {
 
 /* Hiệu ứng khi di chuột vào nút */
 .btn-tech:hover {
-    /* Nền chuyển sang xám */
-    background: #cfcfcf; 
-    color: #000; /* Chữ chuyển sang đen */
-    
-    /* Phát sáng màu xám */
-    box-shadow: 0 0 15px #cfcfcf; 
+    /* Nền và bóng chuyển sang xám */
+    background: #cfcfcf !important; 
+    color: #000 !important; /* Chữ đen */
+    box-shadow: 0 0 15px #cfcfcf !important; 
 }
 
 /* =========================================
