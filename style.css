@@ -77,6 +77,12 @@ header {
     height: 40px; /* Chiều cao cố định (bạn có thể chỉnh to nhỏ tùy ý) */
     width: auto;  /* Chiều rộng tự động */
 }
+/* Gỡ bỏ viền xanh cho ảnh Logo trên menu */
+.logo img {
+    border: none !important;  /* Xóa viền */
+    outline: none !important; /* Xóa nét bao ngoài (nếu có) */
+    box-shadow: none !important; /* Xóa bóng phát sáng (nếu có) */
+}
 .highlight { color: var(--accent-color); }
 /* Style mặc định cho các nút trên menu */
 nav a {
