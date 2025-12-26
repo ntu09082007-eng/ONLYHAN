@@ -697,23 +697,3 @@ footer {
     margin-bottom: 20px;       /* Tạo khoảng cách thoáng giữa các đoạn văn */
     line-height: 1.6;          /* Giãn dòng ra một chút cho dễ đọc */
 }
-/* Style cho nút "Thông tin chi tiết" */
-a.detail-link {
-    display: inline-block; /* Giúp thẻ a nhận các thuộc tính padding, margin */
-    padding: 10px 20px;    /* Tạo khoảng cách bên trong nút */
-    background-color: #6a0dad; /* Màu nền tím đậm (bạn có thể đổi màu khác) */
-    color: #ffffff;        /* Màu chữ trắng */
-    text-decoration: none; /* Bỏ gạch chân mặc định của link */
-    border-radius: 25px;   /* Bo tròn các góc tạo cảm giác hiện đại */
-    font-weight: bold;     /* Chữ in đậm */
-    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà khi di chuột */
-    margin-top: 15px;      /* Tạo khoảng cách với nội dung phía trên */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Tạo bóng nhẹ cho nút nổi lên */
-}
-
-/* Hiệu ứng khi di chuột vào nút */
-a.detail-link:hover {
-    background-color: #8a2be2; /* Đổi màu nền sáng hơn khi hover */
-    transform: translateY(-2px); /* Nút nẩy lên nhẹ một chút */
-    box-shadow: 0 6px 8px rgba(0,0,0,0.15); /* Bóng đổ sâu hơn */
-}
