@@ -5,11 +5,13 @@
     --bg-color: #050505;
     --text-color: #e0e0e0;
     
-    /* --- SỬA DÒNG NÀY --- */
-    --accent-color: #00f0ff; /* Đổi từ #ff0000 về lại #00f0ff (Xanh Neon) */
+    /* --- ĐỔI THÀNH MÀU XÁM BẠC (SILVER) --- */
+    --accent-color: #cfcfcf; /* Màu xám sáng, sang trọng trên nền đen */
     
     --border-color: #333;
-    /* Các dòng font chữ giữ nguyên */
+    /* Font chữ giữ nguyên Quicksand cho mềm mại */
+    --font-main: 'Quicksand', sans-serif; 
+    --font-tech: 'Quicksand', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -75,13 +77,13 @@ nav a:hover { color: var(--accent-color); }
     position: absolute;
     
     /* --- SỬA DÒNG NÀY --- */
-    bottom: 180px;  /* Tăng từ 80px lên 180px để né cái HUD bên dưới ra */
+    bottom: 180px;  /* Đẩy lên cao 180px để tách biệt hẳn với phần chân trang */
     
     left: 60px;
     max-width: 450px;
-    text-align: left;
+    text-align: justify; /* Căn đều 2 bên như bạn thích */
     
-    /* Đảm bảo 2 dòng này đang dùng var(--accent-color) */
+    /* Dòng này sẽ tự động ăn theo màu Xám Bạc ở trên */
     border-left: 4px solid var(--accent-color); 
     z-index: 20;
 }
