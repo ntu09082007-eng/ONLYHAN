@@ -1086,15 +1086,69 @@ section {
 ========================================= */
 
 /* 1. Sửa lại cái container chính trong Modal để nó xếp các hàng chồng lên nhau */
+/* =============================================================
+   STYLE CHO ALBUM DETAIL (Lưới đều + Thanh cuộn đẹp)
+============================================================= */
+
 #album-grid {
-    display: flex !important; /* Ghi đè style grid cũ */
-    flex-direction: column;   /* Xếp dọc */
-    gap: 20px;                /* Khoảng cách giữa các HÀNG */
-    padding: 10px;
+    /* 1. Thiết lập Lưới (Grid) chuẩn */
+    display: grid !important;
+    /* Tự động chia cột: Ảnh sẽ luôn to khoảng 250px - 300px */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 15px;
     
-    /* Đảm bảo nó cuộn được nếu ảnh nhiều */
-    max-height: 70vh; 
-    overflow-y: auto;
+    /* 2. Kích thước và vùng cuộn */
+    padding: 20px 30px 20px 20px !important; /* Đệm bên phải to hơn xíu để né thanh cuộn */
+    width: 100%;
+    max-height: 60vh; /* Giới hạn chiều cao để hiện thanh trượt */
+    overflow-y: auto; /* Cho phép trượt dọc */
+    
+    /* Đảm bảo nằm gọn trong modal */
+    box-sizing: border-box;
+}
+
+/* 3. Chỉnh ảnh về "đúng kích thước" */
+#album-grid img {
+    width: 100%;
+    height: 220px; /* Chiều cao cố định để ảnh đều nhau */
+    object-fit: cover; /* Cắt ảnh vừa khung, không bị méo */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #333;
+}
+
+#album-grid img:hover {
+    transform: scale(1.02); /* Phóng to nhẹ */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    border-color: #fff;
+}
+
+/* =============================================================
+   CUSTOM SCROLLBAR (THANH TRƯỢT GIỐNG ẢNH 2)
+   Áp dụng riêng cho khung #album-grid
+============================================================= */
+
+/* Bề rộng của thanh cuộn */
+#album-grid::-webkit-scrollbar {
+    width: 4px; /* Mỏng dính (giống trong ảnh Gallery) */
+}
+
+/* Đường ray (nền) của thanh cuộn */
+#album-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* Mờ mờ */
+    border-radius: 10px;
+}
+
+/* Cái cục trượt (Thumb) */
+#album-grid::-webkit-scrollbar-thumb {
+    background: #cfcfcf; /* Màu bạc (hoặc thay bằng var(--accent-color) nếu muốn màu khác) */
+    border-radius: 10px;
+}
+
+/* Khi di chuột vào thanh cuộn thì nó sáng lên chút */
+#album-grid::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; 
 }
 
 /* 2. Style chung cho từng hàng */
