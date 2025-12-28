@@ -9,9 +9,8 @@
     --accent-color: #DDDDDD; /* Đã đổi lại thành XANH DƯƠNG NEON */
     
     --border-color: #333;
-    /* Font chữ giữ nguyên Quicksand cho mềm mại */
-    --font-main: 'Fredoka', sans-serif;
-    --font-tech: 'Fredoka', sans-serif;
+    --font-main: 'Comfortaa', cursive;
+    --font-tech: 'Comfortaa', cursive;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
