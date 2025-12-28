@@ -1056,3 +1056,10 @@ footer {
     box-shadow: 0 0 15px #cfcfcf; /* Phát sáng neon */
     transform: translateY(-2px); /* Bay lên nhẹ 1 chút */
 }
+/* =========================================
+   FIX LỖI MENU CHE TIÊU ĐỀ KHI CUỘN TRANG
+========================================= */
+section {
+    /* Đẩy điểm cuộn xuống 100px (hoặc 120px tùy độ dày menu của bạn) */
+    scroll-margin-top: 100px; 
+}
