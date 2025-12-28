@@ -952,3 +952,32 @@ footer {
     transition: height 0.1s linear; /* Smooth movement */
     box-shadow: 0 0 10px var(--accent-color); /* Glow effect */
 }
+/* =========================================
+   SỬA FONT CHO PHẦN EVENTS (LỊCH TRÌNH)
+========================================= */
+
+/* 1. Tên sự kiện (To, dậm, dùng font chính) */
+.event-title {
+    font-family: var(--font-main) !important; /* Ép dùng font chính (Comfortaa/Fredoka) */
+    font-weight: 700; /* In đậm cho nổi bật */
+    font-size: 1.2rem; /* Tăng kích thước lên một xíu */
+    letter-spacing: 0.5px; /* Giãn chữ nhẹ cho thoáng */
+    margin-bottom: 8px; /* Đẩy các dòng dưới ra xa một chút */
+}
+
+/* 2. Ngày tháng & Địa điểm (Nhỏ hơn, dùng font phụ/tech) */
+.event-date, 
+.event-loc {
+    font-family: var(--font-tech) !important; /* Dùng font tech cho nó "ngầu" */
+    font-size: 0.9rem; /* Nhỏ hơn tiêu đề */
+    font-weight: 500; /* Độ đậm vừa phải */
+    opacity: 0.9; /* Mờ nhẹ đi một chút để làm nền cho tiêu đề */
+}
+
+/* 3. Trạng thái (Cái nút nhỏ ví dụ: Sắp diễn ra) */
+.event-status {
+    font-family: var(--font-tech) !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+}
