@@ -5,7 +5,34 @@ const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // 2. BIẾN TOÀN CỤC CHO NHẠC
 let allProducts = [];
-
+// Danh sách video và mô tả chi tiết
+const musicVideos = [
+    {
+        id: 'tamlinh', // Thay bằng ID video Youtube thật của bài này
+        title: 'LYHAN - TÂM LINH ALBUM',
+        desc: 'Composer: Lê Công Thành | Lyricist: Lê Công Thành | Music Producer: Benjamin James | ...',
+        videoId: 'VIDEO_ID_HERE' // Điền ID video Youtube vào đây
+    },
+    {
+        id: 'harley', 
+        title: 'A NEW HARLEY QUINN - LYHAN',
+        desc: '"Am I a new Harley Quinn for you? Put me through hell then you called it love?"...',
+        videoId: 'VIDEO_ID_HERE'
+    },
+    {
+        id: 'nhandanh',
+        title: 'LYHAN - Nhân Danh Tình Yêu',
+        desc: 'COMPOSER: LÊ CÔNG THÀNH | LYRIC: ĐINH QUANG MINH, ĐẶNG BẢO ANH, LÊ CÔNG...',
+        videoId: 'VIDEO_ID_HERE'
+    },
+    {
+        id: 'welcome',
+        title: 'WELCOME HOME - LYHAN | OFFICIAL MUSIC VIDEO',
+        desc: 'Sản phẩm âm nhạc đánh dấu sự trở lại đầy cảm xúc...',
+        videoId: 'VIDEO_ID_HERE'
+    }
+    // Bạn có thể thêm tiếp các bài khác vào đây
+];
 // =======================================================
 // PHẦN A: LOGIC CHO TRANG CHỦ (index.html)
 // =======================================================
@@ -44,34 +71,33 @@ async function fetchEvents() {
     });
 }
 
-// A2. Lấy danh sách nhạc (Carousel)
-async function fetchMusic() {
-    const carousel = document.getElementById('music-carousel');
-    if (!carousel) return; // Nếu không có thẻ này thì thoát
-
-    const { data, error } = await supabaseClient
-        .from('products')
-        .select('*')
-        .order('id', { ascending: false });
-
-    if (error) { console.error(error); return; }
+// A2. Lấy danh sách nhạc (Dùng dữ liệu cục bộ musicVideos)
+function fetchMusic() {
+    // Gán dữ liệu vào biến toàn cục để dùng cho chức năng tìm kiếm
+    allProducts = musicVideos; 
     
-    allProducts = data; // Lưu để tìm kiếm
-    renderCarousel(data);
-    renderModalGrid(data);
+    // Gọi hàm hiển thị
+    renderCarousel(musicVideos);
+    renderModalGrid(musicVideos);
 }
 
 function renderCarousel(products) {
     const container = document.getElementById('music-carousel');
+    if (!container) return;
+    
     container.innerHTML = '';
     products.forEach(item => {
         const card = document.createElement('div');
         card.className = 'music-card';
         card.innerHTML = `
-            <iframe class="video-embed" src="https://www.youtube.com/embed/${item.youtube_id}" title="${item.title}" frameborder="0" allowfullscreen></iframe>
+            <iframe class="video-embed" 
+                src="https://www.youtube.com/embed/${item.videoId}" 
+                title="${item.title}" 
+                frameborder="0" allowfullscreen>
+            </iframe>
             <div class="music-info">
                 <div class="music-title">${item.title}</div>
-                <div class="music-composer">${item.composer}</div>
+                <div class="music-composer">${item.desc}</div>
             </div>
         `;
         container.appendChild(card);
@@ -90,10 +116,16 @@ function renderModalGrid(products) {
     products.forEach(item => {
         const card = document.createElement('div');
         card.className = 'music-card';
-        card.style.width = '100%'; 
+        // card.style.width = '100%'; // Có thể bỏ dòng này nếu CSS đã xử lý grid
         card.innerHTML = `
-            <iframe class="video-embed" src="https://www.youtube.com/embed/${item.youtube_id}" allowfullscreen></iframe>
-            <div class="music-info"><div class="music-title" style="font-size:1rem">${item.title}</div></div>
+            <iframe class="video-embed" 
+                src="https://www.youtube.com/embed/${item.videoId}" 
+                allowfullscreen>
+            </iframe>
+            <div class="music-info">
+                <div class="music-title" style="font-size:1rem">${item.title}</div>
+                <div class="music-composer">${item.desc}</div>
+            </div>
         `;
         container.appendChild(card);
     });
