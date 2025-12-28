@@ -727,10 +727,6 @@ footer {
     gap: 20px;
     height: 600px; /* Fixed height for scrolling */
     position: relative;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.02);
 }
 
 /* Updated Gallery Item Styles */
