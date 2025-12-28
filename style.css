@@ -1040,10 +1040,10 @@ footer {
     text-decoration: none;
     text-transform: uppercase;
     
-    margin-top: 25px; /* Khoảng cách với dòng trên */
+    margin-top: 15px; /* Khoảng cách với dòng trên */
     
     /* --- THÊM DÒNG NÀY: Để tách dòng với chữ ở dưới --- */
-    margin-bottom: 25px; /* Đẩy đoạn văn description xuống xa hơn */
+    margin-bottom: 15px; /* Đẩy đoạn văn description xuống xa hơn */
 
     transition: all 0.3s ease;
     border-radius: 0; 
