@@ -1059,3 +1059,24 @@ section {
     /* Đẩy điểm cuộn xuống 100px (hoặc 120px tùy độ dày menu của bạn) */
     scroll-margin-top: 80px; 
 }
+/* ======================================================
+   THÊM MỚI ĐỂ SỬA LỖI CHE VIỀN ẢNH GALLERY
+====================================================== */
+#photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Chia 2 cột */
+    gap: 20px;       /* Khoảng cách giữa các ảnh */
+    overflow-y: auto; /* Cho phép cuộn */
+    
+    /* QUAN TRỌNG: Thêm đệm để khi hover viền không bị mất */
+    padding: 20px; 
+    
+    /* Đảm bảo chiều cao để cuộn được (nếu chưa có) */
+    height: 100%; 
+}
+
+/* Đảm bảo ảnh khi hover sẽ nổi lên trên cùng, không bị đứa bên cạnh che */
+.gallery-item:hover {
+    z-index: 999;
+    position: relative;
+}
