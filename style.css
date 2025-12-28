@@ -10,8 +10,8 @@
     
     --border-color: #333;
     /* Font chữ giữ nguyên Quicksand cho mềm mại */
-    --font-main: 'Quicksand', sans-serif; 
-    --font-tech: 'Quicksand', sans-serif;
+    --font-main: 'Comfortaa', cursive;
+    --font-tech: 'Comfortaa', cursive;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
