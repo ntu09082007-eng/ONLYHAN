@@ -1022,3 +1022,32 @@ footer {
     color: #000000 !important; /* Chữ đen */
     text-shadow: none !important;
 }
+/* =========================================
+   STYLE CHO NÚT "THÔNG TIN CHI TIẾT"
+   (Giống hệt nút MORE ABOUT LYHAN)
+========================================= */
+.btn-detail {
+    display: inline-block; /* Để thẻ a biến thành khối nút bấm */
+    background: transparent; /* Nền trong suốt */
+    color: #cfcfcf !important; /* Chữ màu xám bạc */
+    border: 1px solid #cfcfcf; /* Viền mảnh */
+    
+    padding: 10px 30px; /* Độ dày của nút */
+    font-family: var(--font-tech); /* Font chữ Tech */
+    font-weight: 700;
+    text-decoration: none; /* Bỏ gạch chân mặc định của link */
+    text-transform: uppercase; /* Viết hoa chữ cái nếu thích */
+    margin-top: 15px; /* Cách xa dòng trên một chút */
+    transition: all 0.3s ease;
+    
+    /* Hình chữ nhật vuông vức (không bo tròn) */
+    border-radius: 0; 
+}
+
+/* Hiệu ứng khi di chuột vào (Sáng rực lên) */
+.btn-detail:hover {
+    background: #cfcfcf; /* Nền chuyển thành màu bạc */
+    color: #000 !important; /* Chữ chuyển thành đen */
+    box-shadow: 0 0 15px #cfcfcf; /* Phát sáng neon */
+    transform: translateY(-2px); /* Bay lên nhẹ 1 chút */
+}
