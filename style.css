@@ -1022,25 +1022,30 @@ footer {
     color: #000000 !important; /* Chữ đen */
     text-shadow: none !important;
 }
-/* =========================================
-   STYLE CHO NÚT "THÔNG TIN CHI TIẾT"
-   (Giống hệt nút MORE ABOUT LYHAN)
-========================================= */
+/* Tìm đoạn này trong style.css và sửa lại các số liệu */
 .btn-detail {
-    display: inline-block; /* Để thẻ a biến thành khối nút bấm */
-    background: transparent; /* Nền trong suốt */
-    color: #cfcfcf !important; /* Chữ màu xám bạc */
-    border: 1px solid #cfcfcf; /* Viền mảnh */
+    display: inline-block;
+    background: transparent;
+    color: #cfcfcf !important;
+    border: 1px solid #cfcfcf;
     
-    padding: 10px 30px; /* Độ dày của nút */
-    font-family: var(--font-tech); /* Font chữ Tech */
+    /* --- SỬA DÒNG NÀY: Giảm padding để nút nhỏ lại --- */
+    padding: 8px 25px;  /* Cũ là 10px 30px -> Sửa thành 8px 25px cho gọn */
+    
+    /* (Tùy chọn) Giảm cỡ chữ đi một xíu cho cân đối */
+    font-size: 0.9rem;
+
+    font-family: var(--font-tech);
     font-weight: 700;
-    text-decoration: none; /* Bỏ gạch chân mặc định của link */
-    text-transform: uppercase; /* Viết hoa chữ cái nếu thích */
-    margin-top: 15px; /* Cách xa dòng trên một chút */
-    transition: all 0.3s ease;
+    text-decoration: none;
+    text-transform: uppercase;
     
-    /* Hình chữ nhật vuông vức (không bo tròn) */
+    margin-top: 15px; /* Khoảng cách với dòng trên */
+    
+    /* --- THÊM DÒNG NÀY: Để tách dòng với chữ ở dưới --- */
+    margin-bottom: 30px; /* Đẩy đoạn văn description xuống xa hơn */
+
+    transition: all 0.3s ease;
     border-radius: 0; 
 }
 
