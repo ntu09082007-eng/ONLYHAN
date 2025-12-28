@@ -725,7 +725,7 @@ footer {
 .photo-gallery-wrapper {
     display: flex;
     gap: 20px;
-    height: 600px; /* Fixed height for scrolling */
+    height: 850px; /* Fixed height for scrolling */
     position: relative;
 }
 
