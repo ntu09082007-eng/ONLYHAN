@@ -130,6 +130,126 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LOGIC CHO PHOTO GALLERY (THANH CUỘN MÀU) ---
+    const gallery = document.getElementById('photo-gallery');
+    const progressLine = document.getElementById('gallery-progress-line');
+
+    if (gallery && progressLine) {
+        gallery.addEventListener('scroll', () => {
+            // Tính toán % đã cuộn
+            const scrollTop = gallery.scrollTop;
+            const maxScroll = gallery.scrollHeight - gallery.clientHeight;
+            
+            if (maxScroll > 0) {
+                const scrollPercent = (scrollTop / maxScroll) * 100;
+                // Cập nhật chiều cao của thanh màu
+                progressLine.style.height = `${scrollPercent}%`;
+            }
+        });
+    }
+
+    // --- NEW LOGIC: GALLERY (LEVEL 1) -> ALBUM MODAL (LEVEL 2) -> LIGHTBOX (LEVEL 3) ---
+    
+    // Level 1: Click Gallery Item -> Open Album Modal
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const albumModal = document.getElementById('album-modal');
+    const closeAlbumModal = document.getElementById('close-album-modal');
+    const albumGrid = document.getElementById('album-grid');
+
+    // Level 3: Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeLightbox = document.getElementById('close-lightbox');
+
+    // --- SAMPLE DATA FOR ALBUM DETAIL (Mapped by ID) ---
+    const albumData = {
+        "1": [
+            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30",
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+            "https://images.unsplash.com/photo-1501612780327-45045538702b",
+            "https://images.unsplash.com/photo-1470225620780-dba8ba36b745",
+            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"
+        ],
+        "2": [
+            "https://images.unsplash.com/photo-1493225255756-d9584f8606e9",
+            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
+            "https://images.unsplash.com/photo-1501612780327-45045538702b",
+            "https://images.unsplash.com/photo-1470225620780-dba8ba36b745",
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
+        ],
+        "3": [
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+            "https://images.unsplash.com/photo-1492684223066-81342ee5ff30",
+            "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4",
+            "https://images.unsplash.com/photo-1493225255756-d9584f8606e9",
+            "https://images.unsplash.com/photo-1501612780327-45045538702b",
+            "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7"
+        ]
+
+    };
+
+    if (galleryItems.length > 0 && albumModal && albumGrid) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const albumId = item.getAttribute('data-album-id');
+                // Get images for this ID, or fallback to album "1" if not found
+                const images = albumData[albumId] || albumData["1"];
+
+                // 1. Open Album Modal
+                albumModal.style.display = 'flex';
+                
+                // 2. Populate Grid with 6 images
+                albumGrid.innerHTML = ''; // Clear old content
+                
+                images.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = "Album Detail Image";
+                    
+                    // Level 3 Interaction: Click detailed image -> Open Lightbox
+                    img.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent bubbling
+                        if (lightbox && lightboxImg) {
+                            lightbox.style.display = 'flex';
+                            lightboxImg.src = src;
+                        }
+                    });
+
+                    albumGrid.appendChild(img);
+                });
+            });
+        });
+
+        // Close Album Modal
+        if (closeAlbumModal) {
+            closeAlbumModal.addEventListener('click', () => {
+                albumModal.style.display = 'none';
+            });
+        }
+        
+        // Close Album Modal when clicking outside content
+        albumModal.addEventListener('click', (e) => {
+            if (e.target === albumModal) {
+                albumModal.style.display = 'none';
+            }
+        });
+    }
+
+    // Close Lightbox Logic
+    if (closeLightbox && lightbox) {
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    }
+
     // CHẠY CÁC HÀM KHỞI TẠO
     fetchEvents();      // Tải danh sách sự kiện
     fetchMusic();       // Tải nhạc
