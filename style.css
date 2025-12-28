@@ -213,18 +213,26 @@ nav a:hover {
     transition: transform 0.3s; 
     cursor: pointer;
 }
-/* --- Code cũ (Giữ nguyên) --- */
-.event-card:hover { 
-    transform: translateY(-5px); 
-    border-color: var(--accent-color); 
+/* ==================================================================
+   HIỆU ỨNG HOVER MỚI CHO THẺ SỰ KIỆN (Giống nút MORE ABOUT LYHAN)
+================================================================== */
+.event-card:hover {
+    transform: translateY(-5px); /* Vẫn giữ hiệu ứng bay lên nhẹ */
+    
+    /* --- PHẦN MỚI --- */
+    background: #cfcfcf !important;       /* Nền chuyển sang màu xám bạc */
+    border-color: #cfcfcf !important;     /* Viền cùng màu nền */
+    box-shadow: 0 0 20px #cfcfcf !important; /* Hiệu ứng phát sáng mạnh */
 }
 
-/* --- Code MỚI THÊM: Đổi màu chữ khi di chuột --- */
+/* QUAN TRỌNG: Đổi màu TẤT CẢ chữ bên trong thành màu ĐEN khi hover */
+.event-card:hover .event-date,
 .event-card:hover .event-title,
 .event-card:hover .event-loc,
-.event-card:hover .event-date {
-    color: var(--accent-color); /* Đổi sang màu xanh neon */
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+.event-card:hover .event-status {
+    color: #000000 !important; /* Chữ đen tuyền */
+    text-shadow: none !important; /* Bỏ bóng chữ nếu có */
+    transition: all 0.3s ease;
 }
 .event-date { font-family: var(--font-tech); color: var(--accent-color); font-size: 0.8rem; margin-bottom: 10px; }
 .event-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
@@ -988,4 +996,29 @@ footer {
     font-weight: 600;
     letter-spacing: 1px;
     font-size: 0.75rem;
+}
+/* ==================================================================
+   HIỆU ỨNG HOVER MỚI CHO THẺ NHẠC (Giống nút MORE ABOUT LYHAN)
+   Áp dụng cho cả Carousel bên ngoài và Lưới bên trong Modal
+================================================================== */
+
+/* 1. Hiệu ứng nền và khung thẻ khi di chuột vào */
+.music-card:hover,
+.modal-grid-body .music-card:hover {
+    transform: translateY(-5px); /* Bay lên nhẹ */
+    
+    /* --- PHẦN MỚI --- */
+    background: #cfcfcf !important;       /* Nền xám bạc */
+    border-color: #cfcfcf !important;     /* Viền xám bạc */
+    box-shadow: 0 0 20px #cfcfcf !important; /* Phát sáng */
+    transition: all 0.3s ease;
+}
+
+/* 2. Đổi màu chữ Tiêu đề và Mô tả thành ĐEN khi di chuột vào thẻ */
+.music-card:hover .music-title,
+.modal-grid-body .music-card:hover .music-title,
+.music-card:hover .music-composer,
+.modal-grid-body .music-card:hover .music-composer {
+    color: #000000 !important; /* Chữ đen */
+    text-shadow: none !important;
 }
