@@ -1126,3 +1126,8 @@ section {
 .album-row img:hover {
     transform: scale(1.05); /* Phóng to nhẹ khi di chuột */
 }
+/* Hạ thấp phần Giới thiệu xuống */
+#about {
+    /* Tăng khoảng cách đệm bên trên lên */
+    padding-top: 150px !important; /* Số càng to thì càng tụt xuống sâu */
+}
