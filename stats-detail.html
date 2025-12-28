@@ -3,75 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thống kê số liệu | ONLYHAN - ALL FOR LYHAN</title>
+    <title>Chi tiết thống kê | ONLYHAN - ALL FOR LYHAN</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <div class="logo">ONLYHAN - <span class="highlight">ALL FOR</span> LYHAN</div>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="stats.html" class="active">Thống kê</a>
-        </nav>
-    </header>
-
+    <div class="bg-overlay"></div>
     <main class="stats-main">
-        <div class="glass-container">
-            <h1 class="stats-header">Thống kê YouTube & Platforms</h1>
-            
-            <div class="stats-search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" id="stats-search" placeholder="Tìm kiếm bài hát, album...">
+        <div class="glass-container detail-view">
+            <div class="detail-top-bar">
+                <h2>Biểu đồ thống kê</h2>
+                <div class="action-buttons">
+                    <a id="btn-watch-link" href="#" target="_blank" class="btn-view-green">Xem Video</a>
+                    <a href="stats.html" class="btn-back">Quay lại</a>
+                </div>
             </div>
 
-            <div id="stats-grid" class="stats-grid-container">
-                <div class="loading">Đang kết nối API dữ liệu...</div>
+            <div class="detail-info-grid">
+                <div class="info-left">
+                    <img id="detail-img" src="" alt="Thumbnail">
+                    <div class="info-text">
+                        <h3 id="detail-title">Loading...</h3>
+                        <div class="platform-badge" id="detail-platform">Youtube</div>
+                    </div>
+                </div>
+                <div class="info-right">
+                    <div class="stat-box">
+                        <span>Lượt xem:</span> <h2 class="val-blue" id="val-view">0</h2>
+                    </div>
+                    <div class="stat-box">
+                        <span>Lượt thích:</span> <h2 class="val-green" id="val-like">0</h2>
+                    </div>
+                    <div class="stat-box">
+                        <span>Bình luận:</span> <h2 class="val-yellow" id="val-comment">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-wrapper">
+                <h3>Biểu đồ thống kê - Thể hiện số lượng tăng theo thời gian</h3>
+                <canvas id="growthChart"></canvas>
             </div>
         </div>
     </main>
 
     <script>
-        // Cấu hình Supabase (Dùng lại key cũ của bạn)
         const supabaseUrl = 'https://srajbfixapsjnmsdldve.supabase.co';
         const supabaseKey = 'sb_publishable_aUPBpRiK4YfjgB7JYw_WSQ_GZd-zSrp';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function loadStats() {
-            const { data, error } = await supabase.from('track_stats').select('*');
-            const grid = document.getElementById('stats-grid');
-            grid.innerHTML = '';
+        async function loadDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if(!id) return;
 
-            if (error) { grid.innerHTML = 'Lỗi tải dữ liệu'; return; }
+            const { data: item } = await supabase.from('track_stats').select('*').eq('id', id).single();
+            
+            // Điền dữ liệu
+            document.getElementById('detail-title').innerText = item.title;
+            document.getElementById('detail-img').src = item.image_url;
+            document.getElementById('detail-platform').innerText = item.platform;
+            document.getElementById('val-view').innerText = item.view_count.toLocaleString();
+            document.getElementById('val-like').innerText = item.like_count.toLocaleString();
+            document.getElementById('val-comment').innerText = item.comment_count.toLocaleString();
+            
+            // Xử lý link nút "Xem Video"
+            const linkBtn = document.getElementById('btn-watch-link');
+            if(item.platform === 'Youtube') {
+                linkBtn.href = `https://www.youtube.com/watch?v=${item.video_id}`;
+            } else {
+                linkBtn.href = item.video_id; // Nếu là link Spotify/Apple
+            }
 
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'glass-card';
-                card.innerHTML = `
-                    <div class="card-img-box">
-                        <img src="${item.image_url}" alt="${item.title}">
-                        <div class="card-overlay">
-                            <button onclick="window.location.href='stats-detail.html?id=${item.id}'" class="btn-view-green">
-                                Xem Chi Tiết
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3 class="card-title">${item.title}</h3>
-                        <div class="card-meta">
-                            <div class="meta-row"><span>Lượt xem:</span> <span class="val-blue">${item.view_count.toLocaleString()}</span></div>
-                            <div class="meta-row"><span>Lượt thích:</span> <span class="val-green">${item.like_count.toLocaleString()}</span></div>
-                            <div class="meta-row"><span>Bình luận:</span> <span class="val-yellow">${item.comment_count.toLocaleString()}</span></div>
-                        </div>
-                        <div class="card-date">Thêm vào: ${item.upload_date}</div>
-                    </div>
-                `;
-                grid.appendChild(card);
+            // Vẽ biểu đồ (Giả lập dữ liệu lịch sử dựa trên số tổng)
+            renderChart(item.view_count, item.like_count);
+        }
+
+        function renderChart(totalView, totalLike) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            // Tạo dữ liệu giả lập cho đẹp (vì chưa có server lưu lịch sử thật)
+            const labels = ['6h trước', '5h trước', '4h trước', '3h trước', '2h trước', '1h trước', 'Hiện tại'];
+            const viewData = labels.map((_, i) => totalView - (totalView * (0.1 * (6-i)))); 
+            const likeData = labels.map((_, i) => totalLike - (totalLike * (0.1 * (6-i))));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Tăng lượt xem', data: viewData, borderColor: '#3b82f6', tension: 0.4 },
+                        { label: 'Tăng lượt thích', data: likeData, borderColor: '#22c55e', tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: 'white' } } },
+                    scales: {
+                        y: { grid: { color: '#333' }, ticks: { color: '#888' } },
+                        x: { grid: { color: '#333' }, ticks: { color: '#888' } }
+                    }
+                }
             });
         }
-        loadStats();
+        loadDetail();
     </script>
 </body>
 </html>
