@@ -1090,20 +1090,20 @@ section {
    STYLE CHO ALBUM DETAIL (Lưới đều + Thanh cuộn đẹp)
 ============================================================= */
 
+/* Tìm đoạn này và sửa lại */
 #album-grid {
-    /* 1. Thiết lập Lưới (Grid) chuẩn */
     display: grid !important;
-    /* Tự động chia cột: Ảnh sẽ luôn to khoảng 250px - 300px */
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 15px;
     
-    /* 2. Kích thước và vùng cuộn */
-    padding: 20px 30px 20px 20px !important; /* Đệm bên phải to hơn xíu để né thanh cuộn */
-    width: 100%;
-    max-height: 60vh; /* Giới hạn chiều cao để hiện thanh trượt */
-    overflow-y: auto; /* Cho phép trượt dọc */
+    /* --- SỬA DÒNG NÀY --- */
+    /* Thêm margin-top: 40px để đẩy lưới ảnh xa cái tiêu đề ra */
+    margin-top: 40px !important; 
     
-    /* Đảm bảo nằm gọn trong modal */
+    padding: 10px 30px 20px 20px !important;
+    width: 100%;
+    max-height: 60vh; 
+    overflow-y: auto;
     box-sizing: border-box;
 }
 
