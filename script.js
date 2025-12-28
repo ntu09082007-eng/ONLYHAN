@@ -222,37 +222,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
-    if (galleryItems.length > 0 && albumModal && albumGrid) {
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const albumId = item.getAttribute('data-album-id');
-                // Get images for this ID, or fallback to album "1" if not found
-                const images = albumData[albumId] || albumData["1"];
+    // --- TÌM ĐOẠN NÀY TRONG SCRIPT.JS VÀ THAY THẾ ---
 
-                // 1. Open Album Modal
-                albumModal.style.display = 'flex';
-                
-                // 2. Populate Grid with 6 images
-                albumGrid.innerHTML = ''; // Clear old content
-                
-                images.forEach(src => {
+if (galleryItems.length > 0 && albumModal && albumGrid) {
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const albumId = item.getAttribute('data-album-id');
+            // Lấy danh sách 12 ảnh (hoặc nhiều hơn)
+            let images = albumData[albumId] || albumData["1"];
+
+            // 1. Mở Modal
+            albumModal.style.display = 'flex';
+            
+            // 2. Xóa nội dung cũ
+            albumGrid.innerHTML = ''; 
+            
+            // --- LOGIC MỚI: CHIA ẢNH THÀNH CÁC HÀNG 4-5-3 ---
+
+            // Định nghĩa kiểu bố cục bạn muốn (Hàng 1: 4 ảnh, Hàng 2: 5 ảnh, Hàng 3: 3 ảnh)
+            // Nếu có nhiều ảnh hơn thì cứ thêm số vào mảng này: [4, 5, 3, 4, ...]
+            const layoutPattern = [4, 5, 3]; 
+            
+            let imageIndex = 0; // Biến đếm để biết đang lấy đến ảnh nào
+
+            // Duyệt qua từng số trong mẫu bố cục (ví dụ: số 4 trước)
+            layoutPattern.forEach(count => {
+                // Nếu đã hết ảnh thì dừng lại
+                if (imageIndex >= images.length) return;
+
+                // a. Tạo một cái thẻ <div> làm HÀNG
+                const rowDiv = document.createElement('div');
+                // Thêm class tương ứng, ví dụ: "album-row row-4"
+                rowDiv.className = `album-row row-${count}`; 
+
+                // b. Cắt lấy số lượng ảnh cần thiết cho hàng này
+                // (ví dụ hàng đầu tiên lấy từ ảnh 0 đến ảnh 4)
+                const rowImages = images.slice(imageIndex, imageIndex + count);
+
+                // c. Tạo thẻ <img> và nhét vào hàng vừa tạo
+                rowImages.forEach(src => {
                     const img = document.createElement('img');
                     img.src = src;
                     img.alt = "Album Detail Image";
                     
-                    // Level 3 Interaction: Click detailed image -> Open Lightbox
+                    // Sự kiện click vào ảnh nhỏ để mở Lightbox to đùng
                     img.addEventListener('click', (e) => {
-                        e.stopPropagation(); // Prevent bubbling
+                        e.stopPropagation();
                         if (lightbox && lightboxImg) {
                             lightbox.style.display = 'flex';
                             lightboxImg.src = src;
                         }
                     });
-
-                    albumGrid.appendChild(img);
+                    rowDiv.appendChild(img); // Nhét ảnh vào HÀNG
                 });
+
+                // d. Nhét HÀNG vào container chính
+                albumGrid.appendChild(rowDiv);
+
+                // e. Tăng biến đếm lên để lần sau cắt tiếp từ vị trí mới
+                imageIndex += count;
             });
+            
+            // (Tùy chọn) Xử lý các ảnh còn thừa nếu tổng số ảnh > 12
+            if (imageIndex < images.length) {
+                 const remainingImages = images.slice(imageIndex);
+                 const defaultRow = document.createElement('div');
+                 // Hàng mặc định nếu thừa ảnh (ví dụ chia 4 cột)
+                 defaultRow.className = 'album-row row-4'; 
+                 remainingImages.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    // ... (copy lại sự kiện click lightbox ở trên vào đây nếu cần) ...
+                    defaultRow.appendChild(img);
+                 });
+                 albumGrid.appendChild(defaultRow);
+            }
         });
+    });
+// ... (phần code đóng modal giữ nguyên)
 
         // Close Album Modal
         if (closeAlbumModal) {
