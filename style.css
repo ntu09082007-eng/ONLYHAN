@@ -697,3 +697,256 @@ footer {
     margin-bottom: 20px;       /* Tạo khoảng cách thoáng giữa các đoạn văn */
     line-height: 1.6;          /* Giãn dòng ra một chút cho dễ đọc */
 }
+
+/* =========================================
+   PHOTO SECTION (GALLERY SCROLL)
+========================================= */
+/* =========================================
+   PHOTO SECTION (GALLERY SCROLL)
+========================================= */
+.photo-gallery-wrapper {
+    display: flex;
+    gap: 20px;
+    height: 600px; /* Fixed height for scrolling */
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Updated Gallery Item Styles */
+.photo-gallery {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 Columns Grid */
+    gap: 20px;
+    padding-right: 10px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+    /* flex-shrink: 0; No longer needed with grid */
+    height: 250px; /* Fixed height for consistent grid look */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the area */
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+/* ... existing hover styles ... */
+
+/* Album Modal Styles (Level 2) */
+.album-modal-content {
+    width: 95vw; /* Rộng gần như full màn hình */
+    max-width: none; /* Bỏ giới hạn max-width cũ */
+    height: 95vh; /* Cao gần như full màn hình */
+    background: transparent; /* Transparent background */
+    border: none;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.album-modal-content .modal-header {
+    background: transparent;
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+}
+
+.album-modal-content h3 {
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    font-size: 2rem; /* Tăng kích thước tiêu đề */
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.album-grid img:nth-child(5),
+.album-grid img:nth-child(6) {
+    grid-column: span 2;
+}
+.album-grid::-webkit-scrollbar { display: none; }
+
+.album-grid img {
+    width: 100%;
+    /* Bỏ height: 100% để tránh ép ảnh bị méo */
+    height: auto; 
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* First 4 images: Standard Grid (2x2) - Normal Aspect Ratio */
+.album-grid img:nth-child(1),
+.album-grid img:nth-child(2),
+.album-grid img:nth-child(3),
+.album-grid img:nth-child(4) {
+    aspect-ratio: 16/9; /* Landscapeish */
+}
+
+/* Last 2 images: Tall Portrait */
+.album-grid img:nth-child(5),
+.album-grid img:nth-child(6) {
+    aspect-ratio: 9/16; /* Tall Portrait */
+}
+
+.album-grid img:hover {
+    transform: scale(1.02);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .photo-gallery {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+    .album-grid {
+        grid-template-columns: 1fr; /* 1 column mobile modal */
+    }
+}
+
+.gallery-item:hover {
+    transform: scale(1.01);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.gallery-item:hover img {
+    opacity: 1;
+}
+
+/* Hover Overlay Styles */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.overlay-content {
+    text-align: center;
+    color: #fff;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .overlay-content {
+    transform: translateY(0);
+}
+
+.overlay-content h3 {
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.overlay-content p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+    border-radius: 8px;
+    animation: zoomIn 0.3s;
+    object-fit: contain;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0.8); opacity: 0;} 
+    to {transform: scale(1); opacity: 1;}
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: 300;
+    transition: 0.3s;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10000;
+}
+
+.close-lightbox:hover {
+    color: var(--accent-color);
+    transform: rotate(90deg);
+}
+
+/* Container for the progress line */
+.gallery-progress-bar {
+    width: 4px;
+    background-color: #333;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    height: 100%; /* Fill the height of the wrapper */
+}
+
+/* The moving line itself */
+.gallery-progress-line {
+    width: 100%;
+    height: 0%; /* Start at 0 */
+    background-color: var(--accent-color); /* Neon Blue */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: height 0.1s linear; /* Smooth movement */
+    box-shadow: 0 0 10px var(--accent-color); /* Glow effect */
+}
